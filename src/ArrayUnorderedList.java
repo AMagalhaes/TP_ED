@@ -1,12 +1,8 @@
 
 
-import exceptions.ElementNotFoundException;
 
 import java.util.Iterator;
 
-/**
- * Created by antoniomagalhaes on 27/11/14.
- */
 public class ArrayUnorderedList<T> {
     private T[] traco;
 

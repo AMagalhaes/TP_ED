@@ -1,9 +1,15 @@
 package Interfaces;
 
-import Interfaces.GraphADT;
+/**
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
+ */
+
 
 /**
- * Created by antoniomagalhaes on 03/01/15.
+ * Interface UnorderedListADT contains the behaviors of FaceNetwork.
+ * @param <T> Indicates that the interface and the generic type.
  */
 public interface NetworkADT<T> extends GraphADT<T> {
 
