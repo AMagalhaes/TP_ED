@@ -1,6 +1,5 @@
 package Interfaces;
 
-import Interfaces.GraphADT;
 
 /**
  * Created by antoniomagalhaes on 03/01/15.
@@ -14,7 +13,7 @@ public interface NetworkADT<T> extends GraphADT<T> {
      * @param vertex2 the second vertex
      * @param weight the weight
      */
-    public void addedge(T vertex1, T vertex2, double weight);
+    public void addEdge(T vertex1, T vertex2, double weight);
 
 
     /**

@@ -90,7 +90,7 @@ public class Graph<T> implements GraphADT<T> {
      * @param vertice
      * @return posição do vertice se existir,caso não exista chama exception
      */
-    private int getIndex(T vertice) {
+    protected int getIndex(T vertice) {
         for (int pos = 0; pos < vertices.length; pos++) {
             if (vertices[pos] != null) {
                 if (vertices[pos] == vertice) {
@@ -164,15 +164,13 @@ public class Graph<T> implements GraphADT<T> {
             }
         }
         // percorrer a matriz para anular as arestas deste vertice
-        for (int i = pos; i < vertices.length; i++) {
+        for (int i = 0; i < vertices.length; i++) {
             if (this.adjMatrix[pos][i] == true) {
-                System.out.println("==> " + pos + " - " + i);
                 this.adjMatrix[pos][i] = false;
                 this.numEdges--;
             }
 
             if (this.adjMatrix[i][pos] == true) {
-                System.out.println("==> " + i + " - " + pos);
                 this.adjMatrix[i][pos] = false;
                 this.numEdges--;
             }
