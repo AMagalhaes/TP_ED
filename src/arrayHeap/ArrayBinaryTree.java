@@ -4,12 +4,16 @@ import Interfaces.BinaryTreeADT;
 
 import java.util.Iterator;
 
+
 /**
- * Created by antoniomagalhaes on 04/12/14.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     protected int count;
-    public T[] tree =(T[]) new  Object[100];
+    public T[] tree = (T[]) new Object[100];
     private int pos = 0;
     private final int CAPACITY = 30;
 
@@ -86,9 +90,9 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     }
 
     /**
-     * para a posição n do array
-     * o filho esquerdo é armazenado em ((2*n)+1)
-     * o filho direito(2*(n+1))
+     * to position in the array n
+     * the left child is stored in ((2*n)+1)
+     * the right child(2*(n+1))
      */
 
     protected void preOrder(ArrayUnorderedList<T> tempList) {
@@ -145,10 +149,10 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     }
 
 
-    public void expandCapacity(){
-        T[] aux =(T[]) new Object[tree.length*2];
-        System.arraycopy(tree,0,aux,0,tree.length);
-        tree=aux;
+    public void expandCapacity() {
+        T[] aux = (T[]) new Object[tree.length * 2];
+        System.arraycopy(tree, 0, aux, 0, tree.length);
+        tree = aux;
     }
 //           getters and setters
 

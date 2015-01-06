@@ -4,7 +4,7 @@ import Interfaces.StackADT;
 import exceptions.EmptyCollectionException;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */

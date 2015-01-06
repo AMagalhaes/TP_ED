@@ -3,15 +3,15 @@ package Interfaces;
 import exceptions.EmptyQueueException;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */
 
 /**
- * Interface QueueADT contem os comportamentos de uma queue.
+ * Interface QueueADT contains the behavior of a queue.
  *
- * @param <T> Indica que a interface e do tipo generico.
+ * @param <T> Indicates that the interface and the generic type.
  */
 public interface QueueADT<T> {
     /**

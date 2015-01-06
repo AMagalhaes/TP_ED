@@ -5,15 +5,15 @@ import exceptions.EmptyCollectionException;
 import exceptions.EmptyQueueException;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */
 
 /**
- * Interface StackADT contem os comportamentos de uma stack.
+ * StackADT interface contains the behaviors of a stack.
  *
- * @param <T> Indica que a interface e do tipo generico.
+ * @param <T> Indicates that the interface and the generic type.
  */
 public interface StackADT<T> {
     /**

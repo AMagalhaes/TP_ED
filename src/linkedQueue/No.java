@@ -1,7 +1,7 @@
 package linkedQueue;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */
@@ -12,7 +12,7 @@ public class No<T> {
     private T elemento;
 
     /**
-     * criacao do no com o elemento
+     * creation of the node with the element
      *
      * @param elemento
      */

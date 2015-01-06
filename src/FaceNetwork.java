@@ -8,8 +8,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * Created by antoniomagalhaes on 06/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class FaceNetwork<T> extends Graph<T> implements NetworkADT<T> {
 
     public float DEFAULT_WEIGHT = 1.0F;

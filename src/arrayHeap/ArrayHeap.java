@@ -1,10 +1,16 @@
 package arrayHeap;
 
 import Interfaces.HeapADT;
-import arrayHeap.ArrayBinaryTree;
+
 
 /**
- * Created by antoniomagalhaes on 12/12/14.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
+ */
+
+/**
+ * Class that implements the behavior of the heap.
  */
 public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T> {
 
@@ -17,6 +23,9 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T> {
         super(element);
     }
 
+    /**
+     * add element
+     */
     @Override
     public void addElement(T obj) {
         boolean added = false;

@@ -4,7 +4,7 @@ import Interfaces.QueueADT;
 import exceptions.EmptyQueueException;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */

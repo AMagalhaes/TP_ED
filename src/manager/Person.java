@@ -1,7 +1,10 @@
 package manager;
 
 /**
- * Created by PedroFernandes on 06/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class Person {
 }

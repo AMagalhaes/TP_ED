@@ -8,8 +8,11 @@ import linkedStack.LinkedStack;
 import java.util.Iterator;
 
 /**
- * Created by antoniomagalhaes on 03/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class Graph<T> implements GraphADT<T> {
 
     protected final int DEFAULT_CAPACITY = 10;

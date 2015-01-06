@@ -3,6 +3,12 @@
 
 import java.util.Iterator;
 
+/**
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
+ */
+
 public class ArrayUnorderedList<T> {
     private T[] traco;
 

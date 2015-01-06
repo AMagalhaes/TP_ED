@@ -1,7 +1,9 @@
 import Interfaces.GraphADT;
 
 /**
- * Created by antoniomagalhaes on 05/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
 
 

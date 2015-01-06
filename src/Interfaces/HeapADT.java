@@ -1,25 +1,25 @@
 package Interfaces;
 
 /**
- * Created by antoniomagalhaes on 12/12/14.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
-public interface HeapADT<T> extends  BinaryTreeADT<T> {
+
+public interface HeapADT<T> extends BinaryTreeADT<T> {
     /**
-     * Adiciona o elemento á Heap
-     *
-     * @param obj elemento a adcionar a esta Heap
+     * Adds the element will Heap
      */
     public void addElement(T obj);
 
     /**
-     * Remove o elemento com valor minimo nesta Heap
-     * Return o elemento com valor mais baixo aHeap
+     * Removes the element with minimum value in this Heap
      */
     public T removeMin();
 
+
     /**
-     *
-     * @return a referencia para o elemento cpm o valor mais baixo
+     * Find the element with minimum value in this Heap
      */
     public T findMin();
 

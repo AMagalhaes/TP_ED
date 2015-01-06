@@ -1,7 +1,7 @@
 package Interfaces;
 
 /**
- * Trabalho realizado por:
+ * Work done by:
  * Antonio Magalhaes
  * Pedro Fernandes
  */
@@ -9,9 +9,9 @@ package Interfaces;
 import exceptions.ElementNotFoundException;
 
 /**
- * Interface UnorderedListADT contem os comportamentos de uma lista nao ordernada.
+ * Interface UnorderedListADT contains the behavior of a non ordernada list.
  *
- * @param <T> Indica que a interface e do tipo generico.
+ * @param <T> Indicates that the interface and the generic type.
  */
 
 public interface UnorderedListADT<T> extends ListADT<T> {
