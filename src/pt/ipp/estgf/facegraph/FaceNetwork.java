@@ -1,6 +1,6 @@
 package pt.ipp.estgf.facegraph;
 
-import pt.ipp.estgf.facegraph.Interfaces.NetworkADT;
+import pt.ipp.estgf.facegraph.Interfaces.FaceNetworkADT;
 import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 
@@ -12,7 +12,7 @@ import java.util.Iterator;
  * Pedro Fernandes
  */
 
-public class FaceNetwork<T> extends Graph<T> implements NetworkADT<T> {
+public class FaceNetwork<T> extends Graph<T> implements FaceNetworkADT<T> {
 
     public float DEFAULT_WEIGHT = 1.0F;
     protected double [][] weights;

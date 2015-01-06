@@ -2,6 +2,7 @@ package pt.ipp.estgf.facegraph.linkedStack;
 
 import pt.ipp.estgf.facegraph.Interfaces.StackADT;
 import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
+import pt.ipp.estgf.facegraph.linkedQueue.No;
 
 /**
  * Work done by:

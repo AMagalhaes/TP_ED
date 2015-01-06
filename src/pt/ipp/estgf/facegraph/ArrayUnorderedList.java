@@ -16,12 +16,15 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
 
     private int size, modCount;
 
-    public ArrayUnorderedList(int capacity) {
+    public ArrayUnorderedList( int capacity) {
         this.size = 0;
         this.modCount = 0;
         item = new Object[capacity];
     }
 
+    /**
+     * Adds a new element in the list beginning
+     */
     @Override
     public void addFront(Object elem) {
         modCount++;
@@ -33,6 +36,9 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
         size++;
     }
 
+    /**
+     * Inserts a new element in the list of the tail
+     */
     @Override
     public void addRear(Object elem) {
         modCount++;
@@ -48,6 +54,12 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
         }
     }
 
+    /**
+     * Inserts an element after a given target (element)
+     *
+     * @param target element that will stay before the element added
+     * @param elem
+     */
     @Override
     public void addAfter(Object target, Object elem) {
         modCount++;

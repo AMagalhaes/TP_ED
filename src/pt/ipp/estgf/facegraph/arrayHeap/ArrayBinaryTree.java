@@ -83,7 +83,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorPreOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
         preOrder(tempList);
         return tempList.iterator();
 
@@ -106,7 +106,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorInOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
         inOrder(tempList);
         return tempList.iterator();
     }
@@ -121,7 +121,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorPostOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
         preOrder(tempList);
         return tempList.iterator();
     }
@@ -136,7 +136,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorlevelOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
         levelOrder(tempList);
         return tempList.iterator();
     }

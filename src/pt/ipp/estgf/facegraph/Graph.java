@@ -217,7 +217,7 @@ public class Graph<T> implements GraphADT<T> {
     public Iterator<T> iterartorBFS(T startVertex) {
         Integer x;
         LinkedQueue<Integer> transversalQueue = new LinkedQueue<Integer>();
-        ArrayUnorderedList<T> resultList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> resultList = new ArrayUnorderedList<T>(DEFAULT_CAPACITY);
 
         try {
             if (!this.indexIsValid((Integer) startVertex)) {
@@ -237,7 +237,7 @@ public class Graph<T> implements GraphADT<T> {
         try {
             while (!transversalQueue.isEmpty()) {
                 x = transversalQueue.dequeue();
-                resultList.addToRear(vertices[x.intValue()]);
+                resultList.addRear(vertices[x.intValue()]);
 
                 /**
                  * encontrar todos os vertices adjeacebtes de x que não foram visitados mas estão na QUEUE
@@ -261,7 +261,7 @@ public class Graph<T> implements GraphADT<T> {
         Integer x;
         boolean found;
         LinkedStack<Integer> transversalStack = new LinkedStack<Integer>();
-        ArrayUnorderedList<T> resultList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> resultList = new ArrayUnorderedList<T>(DEFAULT_CAPACITY);
         boolean[] visited = new boolean[numVertices];
         try {
             if (!this.indexIsValid((Integer) startVertex)) {
@@ -274,7 +274,7 @@ public class Graph<T> implements GraphADT<T> {
             visited[i] = false;
         }
         transversalStack.push(new Integer((Integer) startVertex));
-        resultList.addToRear(vertices[(Integer) startVertex]);
+        resultList.addRear(vertices[(Integer) startVertex]);
         visited[(Integer) startVertex] = true;
         while (!transversalStack.isEmpty()) {
             x = transversalStack.peek();
@@ -286,7 +286,7 @@ public class Graph<T> implements GraphADT<T> {
             for (int i = 0; i < (numVertices) && !found; i++) {
                 if (adjMatrix[x.intValue()][i] && !visited[i]) {
                     transversalStack.push(new Integer(i));
-                    resultList.addToRear(vertices[i]);
+                    resultList.addRear(vertices[i]);
                     found = true;
                 }
             }

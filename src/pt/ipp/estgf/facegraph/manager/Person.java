@@ -7,4 +7,5 @@ package pt.ipp.estgf.facegraph.manager;
  */
 
 public class Person {
+
 }
