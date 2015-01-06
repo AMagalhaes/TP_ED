@@ -2,12 +2,13 @@ package linkedStack;
 
 import Interfaces.StackADT;
 import exceptions.EmptyCollectionException;
-import linkedStack.No;
-
 
 /**
- * Created by antoniomagalhaes on 17/10/14.
+ * Trabalho realizado por:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class LinkedStack<T> implements StackADT<T> {
     private No<T> no = null;
     private int size = 0;
@@ -15,9 +16,13 @@ public class LinkedStack<T> implements StackADT<T> {
     public LinkedStack() {
     }
 
-
-    public void push(T elemento) {
-        No aux = new No(elemento);
+    /**
+     * Adds one element to the top of this stack.
+     *
+     * @param element element to be pushed onto stack.
+     */
+    public void push(T element) {
+        No aux = new No(element);
         if (no == null) {
             no = aux;
         } else {
@@ -30,6 +35,7 @@ public class LinkedStack<T> implements StackADT<T> {
 
     @Override
     public T pop() throws EmptyCollectionException {
+        // Check if the stack if empty
         if (isEmpty()) {
             throw new EmptyCollectionException("Lista Vazia");
         }
@@ -37,12 +43,17 @@ public class LinkedStack<T> implements StackADT<T> {
         No aux = no.getProximo();
         no = aux;
 
+        // Decrements the size
         this.size--;
 
         return (T) aux.getElemento();
     }
 
-
+    /**
+     * Returns without removing the top element of this stack.
+     *
+     * @return T element on top of the stack
+     */
     @Override
     public T peek() throws EmptyCollectionException {
         if (!isEmpty()) {
@@ -52,7 +63,11 @@ public class LinkedStack<T> implements StackADT<T> {
         return null;
     }
 
-
+    /**
+     * Returns true if this stack contains no elements.
+     *
+     * @return boolean whether or not this stack is empty.
+     */
     @Override
     public boolean isEmpty() {
         if (size == 0) {
@@ -61,8 +76,14 @@ public class LinkedStack<T> implements StackADT<T> {
         return false;
     }
 
+    /**
+     * Returns the number of elements in this stack.
+     *
+     * @return int number of elements in this stack.
+     */
     @Override
     public int size() {
+
         return size;
     }
 

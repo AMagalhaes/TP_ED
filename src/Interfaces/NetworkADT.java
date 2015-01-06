@@ -1,8 +1,15 @@
 package Interfaces;
 
+/**
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
+ */
+
 
 /**
- * Created by antoniomagalhaes on 03/01/15.
+ * Interface UnorderedListADT contains the behaviors of FaceNetwork.
+ * @param <T> Indicates that the interface and the generic type.
  */
 public interface NetworkADT<T> extends GraphADT<T> {
 
@@ -13,7 +20,7 @@ public interface NetworkADT<T> extends GraphADT<T> {
      * @param vertex2 the second vertex
      * @param weight the weight
      */
-    public void addEdge(T vertex1, T vertex2, double weight);
+    public void addedge(T vertex1, T vertex2, double weight);
 
 
     /**

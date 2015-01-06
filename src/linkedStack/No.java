@@ -1,17 +1,19 @@
 package linkedStack;
 
 /**
- * Created by antoniomagalhaes on 17/10/14.
+ * Trabalho realizado por:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
+
 public class No<T> {
     private No proximo;
     private T elemento;
 
     /**
+     * criacao do no com o elemento
      *
-     * cria um nó com o elemento
      * @param elemento
-     *
      */
     public No(T elemento) {
         this.elemento = elemento;
@@ -19,6 +21,7 @@ public class No<T> {
     }
 
     public No<T> getProximo() {
+
         return proximo;
     }
 
@@ -27,15 +30,18 @@ public class No<T> {
     }
 
     public T getElemento() {
+
         return elemento;
     }
 
     public void setElemento(T elemento) {
+
         this.elemento = elemento;
     }
 
     @Override
     public String toString() {
+
         return "  " + proximo + ", elemento=" + elemento;
     }
 }
