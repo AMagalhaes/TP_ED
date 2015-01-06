@@ -1,7 +1,7 @@
 package arrayHeap;
 
 import Interfaces.BinaryTreeADT;
-
+;
 import java.util.Iterator;
 
 /**
@@ -79,7 +79,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorPreOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
         preOrder(tempList);
         return tempList.iterator();
 
@@ -92,7 +92,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      */
 
     protected void preOrder(ArrayUnorderedList<T> tempList) {
-        tempList.addToRear(tree[getPos()]);
+        tempList.addRear(tree[getPos()]);
         setPos(2 * getPos() + 1);
         preOrder(tempList);
         setPos(2 * (getPos() + 1));
@@ -102,7 +102,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorInOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
         inOrder(tempList);
         return tempList.iterator();
     }
@@ -110,14 +110,14 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     protected void inOrder(ArrayUnorderedList<T> tempList) {
         setPos(2 * getPos() + 1);
         preOrder(tempList);
-        tempList.addToRear(tree[getPos()]);
+        tempList.addRear(tree[getPos()]);
         setPos(2 * (getPos() + 1));
         preOrder(tempList);
     }
 
     @Override
     public Iterator<T> iteratorPostOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
         preOrder(tempList);
         return tempList.iterator();
     }
@@ -127,12 +127,12 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
         preOrder(tempList);
         setPos(2 * (getPos() + 1));
         preOrder(tempList);
-        tempList.addToRear(tree[getPos()]);
+        tempList.addRear(tree[getPos()]);
     }
 
     @Override
     public Iterator<T> iteratorlevelOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>(CAPACITY);
         levelOrder(tempList);
         return tempList.iterator();
     }
@@ -140,7 +140,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     protected void levelOrder(ArrayUnorderedList<T> tempList) {
         setPos(getPos() + 1);
         if (tree[getPos()] != null) {
-            tempList.addToRear(tree[getPos()]);
+            tempList.addRear(tree[getPos()]);
         }
     }
 

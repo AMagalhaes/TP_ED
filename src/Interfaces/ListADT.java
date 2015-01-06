@@ -3,6 +3,7 @@ package Interfaces;
 
 import exceptions.ElementNotFoundException;
 import exceptions.EmptyCollectionException;
+import exceptions.EmptyUnorderListException;
 
 import java.util.Iterator;
 
@@ -19,35 +20,35 @@ public interface ListADT<T> extends Iterable<T> {
      *
      * @return the first element from this list
      */
-    public T removeFirst() throws EmptyCollectionException;
+    public T removeFirst() throws EmptyCollectionException, EmptyUnorderListException;
 
     /**
      * Removes and returns the last element from this list.
      *
      * @return the last element from this list
      */
-    public T removeLast() throws EmptyCollectionException;
+    public T removeLast() throws EmptyCollectionException, EmptyUnorderListException;
 
     /**
      * Removes and returns the specified element from this list.
      *
      * @param element the element to be removed from the list
      */
-    public T remove(T element) throws EmptyCollectionException, ElementNotFoundException;
+    public T remove(T element) throws EmptyCollectionException, ElementNotFoundException, EmptyUnorderListException;
 
     /**
      * Returns a reference to the first element in this list.
      *
      * @return a reference to the first element in this list
      */
-    public T first() throws EmptyCollectionException;
+    public T first() throws EmptyCollectionException, EmptyUnorderListException;
 
     /**
      * Returns a reference to the last element in this list.
      *
      * @return a reference to the last element in this list
      */
-    public T last() throws EmptyCollectionException;
+    public T last() throws EmptyCollectionException, EmptyUnorderListException;
 
     /**
      * Returns true if this list contains the specified target element.
@@ -55,7 +56,7 @@ public interface ListADT<T> extends Iterable<T> {
      * @param target the target that is being sought in the list
      * @return true if the list contains this element
      */
-    public boolean contains(T target) throws EmptyCollectionException;
+    public boolean contains(T target) throws EmptyCollectionException, EmptyUnorderListException;
 
     /**
      * Returns true if this list contains no elements.

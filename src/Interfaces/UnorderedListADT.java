@@ -20,14 +20,14 @@ public interface UnorderedListADT<T> extends ListADT<T> {
      *
      * @param element to be added to the list
      */
-    public void addToFront(T element);
+    public void addFront(T element);
 
     /**
      * Adds a element to the rear of the list
      *
      * @param element to be added
      */
-    public void addToRear(T element);
+    public void addRear(T element);
 
     /**
      * Adds a element after a target element
