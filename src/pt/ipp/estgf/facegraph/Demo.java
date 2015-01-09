@@ -32,6 +32,7 @@ public class Demo  {
         grafo.addVertex("Z");
         grafo.addEdge("Z","M");
         grafo.removeVertex("L");
+        //grafo.iterartorBFS("M");
         System.out.println( grafo.tooString());
         grafo.removeVertex("D");
         System.out.println(grafo.isConnected());

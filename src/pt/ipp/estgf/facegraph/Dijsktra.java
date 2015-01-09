@@ -33,7 +33,6 @@ public class Dijkstra {
                  if (dist[v] > d) {
                      dist[v] = d;
                      pred[v] = next;
-
                 }
 
             }
