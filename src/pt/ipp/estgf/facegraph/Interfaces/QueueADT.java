@@ -1,5 +1,6 @@
 package pt.ipp.estgf.facegraph.Interfaces;
 
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
 
 /**
@@ -27,7 +28,7 @@ public interface QueueADT<T> {
      * @return element removed
      * @throws pt.ipp.estgf.facegraph.exceptions.EmptyQueueException
      */
-    public T dequeue() throws EmptyQueueException;
+    public T dequeue() throws EmptyQueueException, EmptyCollectionException;
 
     /**
      * Gets first element of the queue
@@ -35,7 +36,7 @@ public interface QueueADT<T> {
      * @return first element of the queue
      * @throws pt.ipp.estgf.facegraph.exceptions.EmptyQueueException
      */
-    public T first() throws EmptyQueueException;
+    public T first() throws EmptyQueueException, EmptyCollectionException;
 
     /**
      * Verifies if the queue is empty

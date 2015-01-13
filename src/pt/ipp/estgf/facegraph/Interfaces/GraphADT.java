@@ -1,6 +1,8 @@
 package pt.ipp.estgf.facegraph.Interfaces;
 
 import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
+import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
+import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 
 
 import java.util.Iterator;
@@ -57,7 +59,7 @@ public interface GraphADT<T> {
      * @param startVertex he starting vertex
      * @return a bredth first iterator beginning at the given vertex
      */
-    public Iterator iterartorBFS(T startVertex);
+    public Iterator iteratorBFS(T startVertex);
 
     /**
      * Returns a depth first iterator starting with the given vertex
@@ -65,7 +67,7 @@ public interface GraphADT<T> {
      * @param startVertex the starting vertex
      * @return a depth first iterator starting at the given vertex
      */
-    public Iterator iterartorDFS(T startVertex) throws EmptyCollectionException;
+    public Iterator iteratorDFS(T startVertex) throws EmptyCollectionException;
 
 
     /**
@@ -75,7 +77,7 @@ public interface GraphADT<T> {
      * @param targetVertex the ending vertex
      * @return
      */
-    public Iterator iteratorShortestPath(T startVertex, T targetVertex);
+    public Iterator iteratorShortestPath(T startVertex, T targetVertex) throws EmptyCollectionException, IlegalArgumentException, EmptyQueueException;
 
 
     /**

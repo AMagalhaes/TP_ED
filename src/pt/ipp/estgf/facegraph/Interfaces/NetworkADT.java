@@ -11,7 +11,7 @@ package pt.ipp.estgf.facegraph.Interfaces;
  * Interface UnorderedListADT contains the behaviors of pt.ipp.estgf.facegraph.FaceNetwork.
  * @param <T> Indicates that the interface and the generic type.
  */
-public interface FaceNetworkADT<T> extends GraphADT<T> {
+public interface NetworkADT<T> extends GraphADT<T> {
 
 
     /**
@@ -24,7 +24,7 @@ public interface FaceNetworkADT<T> extends GraphADT<T> {
 
 
     /**
-     * Returns te+he weight of the shortest path of the network
+     * Returns the weight of the shortest path of the network
      * @param vertex1 the first vertex
      * @param vertex2 the second vertex
      * @return

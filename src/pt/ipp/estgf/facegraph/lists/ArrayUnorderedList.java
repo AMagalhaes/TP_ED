@@ -1,6 +1,6 @@
-package pt.ipp.estgf.facegraph;
+package pt.ipp.estgf.facegraph.lists;
 
-import pt.ipp.estgf.facegraph.Interfaces.UnorderedListADT;
+import pt.ipp.estgf.facegraph.Interfaces.UnorderedList;
 import pt.ipp.estgf.facegraph.exceptions.EmptyUnorderListException;
 
 import java.util.Iterator;
@@ -10,8 +10,7 @@ import java.util.Iterator;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
-    String elemento, elemDaLista;
+public class ArrayUnorderedList<T> implements UnorderedList<T> {
     private Object[] item;
 
     private int size, modCount;
@@ -26,7 +25,10 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
      * Adds a new element in the list beginning
      */
     @Override
-    public void addFront(Object elem) {
+    public void addToFront(Object elem) {
+        if (this.size == item.length){
+            this.expandArray();
+        }
         modCount++;
         if (isEmpty()) {
             item[0] = elem;
@@ -40,7 +42,10 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
      * Inserts a new element in the list of the tail
      */
     @Override
-    public void addRear(Object elem) {
+    public void addToRear(Object elem) {
+        if (this.size == item.length){
+            this.expandArray();
+        }
         modCount++;
         if (isEmpty()) {
             item[0] = elem;
@@ -231,6 +236,12 @@ public class ArrayUnorderedList<T> implements UnorderedListADT<T> {
                 System.out.println(" Tem de reposicionar o apontador(next())");
             }
         }
+    }
+
+    private void expandArray(){
+        Object[] aux = item;
+        item = new Object[aux.length*2];
+        System.arraycopy(aux, 0, item, 0, aux.length);
     }
 
 

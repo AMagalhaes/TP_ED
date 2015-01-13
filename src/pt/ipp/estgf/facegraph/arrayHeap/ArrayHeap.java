@@ -1,6 +1,7 @@
 package pt.ipp.estgf.facegraph.arrayHeap;
 
 import pt.ipp.estgf.facegraph.Interfaces.HeapADT;
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 
 
 /**
@@ -108,5 +109,11 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T> {
                 pos++;
             }
         }
+    }
+
+    @Override
+    public void removeAll() throws EmptyCollectionException {
+        this.count = 0;
+        tree[0] = null;
     }
 }
