@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="35.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Adicionar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Adicionar Pessoa" />
+                  <MenuItem mnemonicParsing="false" text="Adicionar Amizade" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Remover">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Remover Pessoa" />
+                  <MenuItem mnemonicParsing="false" text="Inimigos" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Visualizar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Maior Proximidade" />
+                  <MenuItem mnemonicParsing="false" text="Menor Proximidade" />
+                  <MenuItem mnemonicParsing="false" text="Caminho" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Imprimir">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Imprime Dados" />
+                  <MenuItem mnemonicParsing="false" text="Imprime Tudo" />
+                  <MenuItem mnemonicParsing="false" text="Habitantes" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Grafos">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Grafo Habitante Minímo" />
+                  <MenuItem mnemonicParsing="false" text="Grafo Habitante" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sair" />
+        </menus>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuBar>
+   </children>
+</VBox>
