@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="167.0" prefWidth="536.0">
          <children>
@@ -51,9 +49,6 @@
                </children>
             </HBox>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
          <padding>
             <Insets top="5.0" />
          </padding>
@@ -68,4 +63,4 @@
          </children>
       </VBox>
    </children>
-</Pane>
+</fx:root>

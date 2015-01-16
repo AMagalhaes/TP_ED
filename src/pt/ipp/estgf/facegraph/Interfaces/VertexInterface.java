@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.classes;
+package pt.ipp.estgf.facegraph.Interfaces;
 
 /**
  * Created by antoniomagalhaes on 13/01/15.

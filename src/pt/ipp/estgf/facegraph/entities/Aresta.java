@@ -1,4 +1,6 @@
-package pt.ipp.estgf.facegraph.classes;
+package pt.ipp.estgf.facegraph.entities;
+
+import pt.ipp.estgf.facegraph.Interfaces.EdgeInterface;
 
 /**
  * Created by antoniomagalhaes on 09/01/15.

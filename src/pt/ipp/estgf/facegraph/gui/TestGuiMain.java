@@ -2,13 +2,8 @@ package pt.ipp.estgf.facegraph.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sun.rmi.rmic.Main;
-
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 public class TestGuiMain extends Application {
 
@@ -23,8 +18,8 @@ public class TestGuiMain extends Application {
         this.primaryStage = stage;
         this.primaryStage.setTitle("The Facebook");
 
-      //  try {
-            // loads root layout from fxml file
+        //try {
+            //loads root layout from fxml file
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/menu.fxml"));
 
 

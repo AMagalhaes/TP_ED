@@ -1,14 +1,10 @@
 package pt.ipp.estgf.facegraph;
 
 import pt.ipp.estgf.facegraph.Heap.LinkedHeap;
-import pt.ipp.estgf.facegraph.Interfaces.HeapADT;
-import pt.ipp.estgf.facegraph.Interfaces.StackADT;
+import pt.ipp.estgf.facegraph.Interfaces.*;
+import pt.ipp.estgf.facegraph.entities.Aresta;
+import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.lists.ArrayUnorderedList;
-import pt.ipp.estgf.facegraph.classes.Aresta;
-import pt.ipp.estgf.facegraph.classes.EdgeInterface;
-import pt.ipp.estgf.facegraph.classes.VertexInterface;
-import pt.ipp.estgf.facegraph.classes.Vertice;
-import pt.ipp.estgf.facegraph.Interfaces.GraphADT;
 import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
@@ -80,16 +76,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
 
     }
 
-    /**
-     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-     public void addEdge(int index1, int index2) throws InvalidIndexException {
-     if (indexIsValid(index1) && indexIsValid(index2)) {
-     adjMatrix[index1][index2] = true;
-     adjMatrix[index2][index1] = true;
-     }
-     }
-     */
 
     /**
      * verifica se existe o vertice,
@@ -240,7 +227,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
         try {
             while (!transversalQueue.isEmpty()) {
                 x = transversalQueue.dequeue();
-                resultList.addToRear(vertices[x.intValue()]);
+                resultList.addToRear(vertices[x]);
 
                 /**
                  * encontrar todos os vertices adjacentes de x que não foram visitados mas estão na QUEUE

@@ -12,21 +12,21 @@ import java.io.IOException;
  * Created by PedroFernandes on 13/01/15.
  */
 
-public class unfriendController {
+public class UnfriendController {
 
     /**
      * Class instance.
      */
-    private static unfriendController instance;
+    private static UnfriendController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static unfriendController getInstance() {
+    public static UnfriendController getInstance() {
         if (instance == null) {
-            instance = new unfriendController();
+            instance = new UnfriendController();
         }
         return instance;
     }
@@ -39,7 +39,7 @@ public class unfriendController {
     private Button buttonConfirm;
 
 
-    private unfriendController(){
+    private UnfriendController(){
         // loads the view
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/person.fxml"));
         loader.setRoot(this);

@@ -12,21 +12,21 @@ import java.io.IOException;
  * Created by PedroFernandes on 13/01/15.
  */
 
-public class addFriendshipController {
+public class AddFriendshipController {
 
     /**
      * Class instance.
      */
-    private static addFriendshipController instance;
+    private static AddFriendshipController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static addFriendshipController getInstance() {
+    public static AddFriendshipController getInstance() {
         if (instance == null) {
-            instance = new addFriendshipController();
+            instance = new AddFriendshipController();
         }
         return instance;
     }
@@ -42,7 +42,7 @@ public class addFriendshipController {
 
 
 
-private addFriendshipController(){
+private AddFriendshipController(){
     // loads the view
     FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/addFriendship.fxml"));
     loader.setRoot(this);
