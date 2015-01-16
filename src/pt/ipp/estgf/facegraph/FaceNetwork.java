@@ -14,6 +14,7 @@ import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.linkedStack.LinkedStack;
 
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -37,7 +38,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
      * @param weight  the weight
      */
     @Override
-    public void addEdge(V vertex1, V vertex2, double weight) {
+    public void addEdge(V vertex1, V vertex2, double weight) throws IlegalArgumentException {
         if (weight < 0.0) {
             try {
                 throw new IlegalArgumentException("o peso da aresta tem que ser > 0.0");
@@ -428,7 +429,27 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
                 return true;
             }
         }
+
         return false;
+    }
+
+    /**
+     * Obtem todos os vertices.
+     *
+     * @return
+     */
+    public V[] getVertexs() {
+        V[] result = (V[]) (new Vertice[this.size()]);
+        int index = 0;
+
+        for (int i = 0; i < this.vertices.length; i++) {
+            if (this.vertices[i] != null) {
+                result[index] = this.vertices[i];
+                index++;
+            }
+        }
+
+        return (V[]) result;
     }
 }
 

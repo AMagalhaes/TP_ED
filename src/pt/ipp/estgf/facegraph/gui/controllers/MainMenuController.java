@@ -17,6 +17,8 @@ public class MainMenuController extends MenuBar {
 
     @FXML
     private MenuItem addPerson;
+    @FXML
+    private MenuItem addFriendShip;
 
     public MainMenuController() {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../views/menu.fxml"));
@@ -29,10 +31,19 @@ public class MainMenuController extends MenuBar {
             e.printStackTrace();
         }
 
+        // adicionar pessoa
         this.addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Teste.getInstance().setCenterNode(AddPersonController.getInstance());
+            }
+        });
+
+        // adicionar amizade
+        this.addFriendShip.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(AddFriendshipController.getInstance());
             }
         });
     }

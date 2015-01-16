@@ -22,6 +22,12 @@ public class Vertice implements VertexInterface {
         this.id++;
     }
 
+    public Vertice(int id, String nome, String cidade) {
+        this.id = id;
+        this.nome = nome;
+        this.cidade = cidade;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,6 +51,11 @@ public class Vertice implements VertexInterface {
     public String getNome() {
         return nome;
 
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 
     @Override

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.gui.Teste;
@@ -41,6 +42,8 @@ public class AddPersonController extends Pane {
     @FXML
     private TextField personCity;
     @FXML
+    private TextArea output;
+    @FXML
     private Button buttonConfirm;
 
     private AddPersonController(){
@@ -60,7 +63,9 @@ public class AddPersonController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Teste.getInstance().getGrath().addVertex(new Vertice(personName.getText(), personCity.getText()));
+                output.setText("Foi criada a pessao");
             }
+
         });
 
     }

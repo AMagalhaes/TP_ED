@@ -42,7 +42,7 @@ public interface GraphADT<T> {
      * @param vertex1 the first vertex
      * @param vertex2 the second vertex
      */
-    public void addEdge(T vertex1, T vertex2);
+    public void addEdge(T vertex1, T vertex2) throws IlegalArgumentException;
 
     /**
      * Removes an edge between two vertex in this graph

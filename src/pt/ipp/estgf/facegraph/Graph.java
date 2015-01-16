@@ -47,17 +47,18 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      * @param vertex2 the second vertex
      */
     @Override
-    public void addEdge(V vertex1, V vertex2) {
+    public void addEdge(V vertex1, V vertex2) throws IlegalArgumentException {
         // Obtem o index dos vertices
         v1Pos = getIndex(vertex1);
         v2Pos = getIndex(vertex2);
 
         // Caso o vertices não existam lança uma exception
         if (v2Pos == -1 || v2Pos == -1) {
-            try {
-                throw new IlegalArgumentException("vertice não encontrado");
-            } catch (IlegalArgumentException e) {
-            }
+            throw new IlegalArgumentException("vertice não encontrado");
+        }
+
+        if (v2Pos == v1Pos) {
+            throw new IlegalArgumentException("Não pode criar uma ligação entre a mesma pessoa.");
         }
 
         // Cria a Arest

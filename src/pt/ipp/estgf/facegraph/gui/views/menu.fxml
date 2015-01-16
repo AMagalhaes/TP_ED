@@ -8,7 +8,7 @@
         <Menu mnemonicParsing="false" text="Adicionar">
             <items>
                 <MenuItem fx:id="addPerson" mnemonicParsing="false" text="Adicionar Pessoa"/>
-                <MenuItem mnemonicParsing="false" text="Adicionar Amizade"/>
+                <MenuItem fx:id="addFriendShip" mnemonicParsing="false" text="Adicionar Amizade"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Remover">
