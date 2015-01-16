@@ -9,7 +9,7 @@ import sun.applet.Main;
 import java.io.IOException;
 
 /**
- * Created by PedroFernandes on 13/01/15.
+ * Created .
  */
 
 public class AddFriendshipController {
