@@ -13,30 +13,29 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Remover">
             <items>
-                <MenuItem mnemonicParsing="false" text="Remover Pessoa"/>
-                <MenuItem mnemonicParsing="false" text="Inimigos"/>
+                <MenuItem fx:id="removePerson" mnemonicParsing="false" text="Remover Pessoa"/>
+                <MenuItem fx:id="enemies" mnemonicParsing="false" text="Inimigos"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Visualizar">
             <items>
-                <MenuItem mnemonicParsing="false" text="Maior Proximidade"/>
-                <MenuItem mnemonicParsing="false" text="Menor Proximidade"/>
-                <MenuItem mnemonicParsing="false" text="Caminho"/>
+                <MenuItem fx:id="biggerProximity" mnemonicParsing="false" text="Maior Proximidade"/>
+                <MenuItem fx:id="shortProximity" mnemonicParsing="false" text="Menor Proximidade"/>
+                <MenuItem fx:id="path" mnemonicParsing="false" text="Caminho"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Imprimir">
             <items>
-                <MenuItem mnemonicParsing="false" text="Imprime Dados"/>
-                <MenuItem mnemonicParsing="false" text="Imprime Tudo"/>
-                <MenuItem mnemonicParsing="false" text="Habitantes"/>
+                <MenuItem fx:id="printData" mnemonicParsing="false" text="Imprime Dados"/>
+                <MenuItem fx:id="printAll" mnemonicParsing="false" text="Imprime Tudo"/>
+                <MenuItem fx:id="habitants" mnemonicParsing="false" text="Habitantes"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Grafos">
             <items>
-                <MenuItem mnemonicParsing="false" text="Grafo Habitante Minímo"/>
-                <MenuItem mnemonicParsing="false" text="Grafo Habitante"/>
+                <MenuItem fx:id="graphMinHabitant" mnemonicParsing="false" text="Grafo Habitante Minímo"/>
+                <MenuItem fx:id="graphHabitant" mnemonicParsing="false" text="Grafo Habitante"/>
             </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Sair"/>
     </menus>
 </fx:root>

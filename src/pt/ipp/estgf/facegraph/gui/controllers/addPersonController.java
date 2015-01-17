@@ -11,11 +11,12 @@ import pt.ipp.estgf.facegraph.gui.Teste;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-
 import java.io.IOException;
 
 /**
- * Created by PedroFernandes on 13/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
 
 public class AddPersonController extends Pane {
@@ -30,8 +31,8 @@ public class AddPersonController extends Pane {
      *
      * @return
      */
-    public static AddPersonController getInstance(){
-        if(instance == null){
+    public static AddPersonController getInstance() {
+        if (instance == null) {
             instance = new AddPersonController();
         }
         return instance;
@@ -46,7 +47,7 @@ public class AddPersonController extends Pane {
     @FXML
     private Button buttonConfirm;
 
-    private AddPersonController(){
+    private AddPersonController() {
         // loads the view
         FXMLLoader loader = new FXMLLoader(AddPersonController.class.getResource("../views/addPerson.fxml"));
         loader.setRoot(this);
@@ -54,7 +55,7 @@ public class AddPersonController extends Pane {
 
         try {
             loader.load();
-        }catch (IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
@@ -69,7 +70,6 @@ public class AddPersonController extends Pane {
         });
 
     }
-
 
 
 }
