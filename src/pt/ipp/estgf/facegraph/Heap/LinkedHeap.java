@@ -59,6 +59,7 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         if (isEmpty()) {
             throw new EmptyCollectionException("Empty Heap");
         }
+
         T minElement = root.getElement();
         if (count == 1) {
             root = null;
@@ -80,7 +81,7 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
 
     /**
      * Returns the element with the lowest value in the heap.
-     *
+     * <p/>
      * Throws an EmptyCollectionException if the heap is empty.
      *
      * @return
@@ -107,6 +108,7 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
     //--------------------------------------------------------------------------
     // PRIVATE
     //--------------------------------------------------------------------------
+
     /**
      * Returns the node that will be the parent of the new node
      *

@@ -14,7 +14,6 @@ import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.linkedStack.LinkedStack;
 
 import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -375,26 +374,24 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
 
-    private int[] getWithWeightOff(double weight, boolean[] visited) {
-        int[] index = new int[2];
+    protected int[] getEdgeWithWeightOf(double weight, boolean[] visited)
+    {
+        int[] edge = new int[2];
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
-                if (adjMatrix[i][j].getWeight() == weight) {
-                    if (!visited[i]) {
-                        index[0] = i;
-                    } else {
-                        index[0] = -1;
-                    }
-                    if (!visited[j]) {
-                        index[0] = j;
-                    } else {
-                        index[0] = -1;
-                    }
-                    return index;
+                if (super.adjMatrix[i][j] != null && (super.adjMatrix[i][j].getWeight() == weight) && (visited[i] ^ visited[j]))
+                {
+                    edge[0] = i;
+                    edge[1] = j;
+                    return edge;
                 }
             }
         }
-        return index;
+
+        /** Will only get to here if a valid edge is not found */
+        edge[0] = -1;
+        edge[1] = -1;
+        return edge;
     }
 
 

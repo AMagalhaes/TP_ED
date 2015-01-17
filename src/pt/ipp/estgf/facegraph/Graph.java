@@ -48,35 +48,32 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      */
     @Override
     public void addEdge(V vertex1, V vertex2) throws IlegalArgumentException {
-        // Obtem o index dos vertices
+        // obtem o index dos vertices
         v1Pos = getIndex(vertex1);
         v2Pos = getIndex(vertex2);
 
-        // Caso o vertices não existam lança uma exception
+        // caso o vertices não existam lança uma exception
         if (v2Pos == -1 || v2Pos == -1) {
-            throw new IlegalArgumentException("vertice não encontrado");
+            throw new IlegalArgumentException("O vertice não existe");
         }
 
+        // verifica se os vertices são iguais
         if (v2Pos == v1Pos) {
             throw new IlegalArgumentException("Não pode criar uma ligação entre a mesma pessoa.");
         }
 
-        // Cria a Arest
+        // cria a Arest
         Aresta newAresta = new Aresta(0);
 
+        // impede a criação de arestas duplicadas
         if (this.adjMatrix[v1Pos][v2Pos] == null) {
             this.adjMatrix[v1Pos][v2Pos] = (E) newAresta;
             this.adjMatrix[v2Pos][v1Pos] = (E) newAresta;
             this.numEdges++;
         } else {
-            try {
-                throw new IlegalArgumentException("aresta duplicada" + v1Pos + " " + v2Pos);
-            } catch (IlegalArgumentException e) {
-            }
+            throw new IlegalArgumentException("aresta duplicada" + v1Pos + " " + v2Pos);
         }
-
     }
-
 
 
     /**
@@ -86,23 +83,30 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      * @return true se existir o vertice, falso caso contrario
      */
     protected boolean indexIsValid(int index) throws IlegalArgumentException {
-        if (vertices[index] == null || index < 0 || index >= vertices.length) { // para ter uma posição valida, o index tem de estar
-            // vazio,ser maior que zero e menor que a ultima posição do array
+        // para ter uma posição valida, o index tem de estar
+        // vazio,ser maior que zero e menor que a ultima posição do array
+        if (index < 0 || index >= vertices.length || vertices[index] == null) {
             return false;
         }
+
         return true;
     }
 
     /**
+     * Obtem o index de um vertice
+     *
      * @param vertice
      * @return posição do vertice se existir,caso não exista chama exception
      */
     protected int getIndex(V vertice) {
+        // tenta encontrar o vertice
         for (int pos = 0; pos < vertices.length; pos++) {
             if (vertices[pos] != null && vertices[pos].equals(vertice)) {
                 return pos;
             }
         }
+
+        // o vertice não existe
         return -1;
     }
 
@@ -114,23 +118,21 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      * @param vertex2 the second vertex
      */
     @Override
-    public void removeEdge(V vertex1, V vertex2) {
+    public void removeEdge(V vertex1, V vertex2) throws IlegalArgumentException {
+        // obtem o index dos vertices
         v1Pos = getIndex(vertex1);
         v2Pos = getIndex(vertex2);
+
+        // verifica se os vertices existem
         if (v1Pos == -1 || v2Pos == -1) {
-            try {
-                throw new IlegalArgumentException("vertice não encontrado");
-            } catch (IlegalArgumentException e) {
-            }
+            throw new IlegalArgumentException("O vertice não existe");
         }
+
+        // apaga a aresta
         if (this.adjMatrix[v1Pos][v2Pos] != null) {
             this.adjMatrix[v1Pos][v2Pos] = null;
+            this.adjMatrix[v2Pos][v1Pos] = null;
             this.numEdges--;
-        } else {
-            try {
-                throw new IlegalArgumentException("aresta não encontrada");
-            } catch (IlegalArgumentException e) {
-            }
         }
     }
 
@@ -142,15 +144,20 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      */
     @Override
     public void addVertex(V vertex) {
-        if (numVertices == vertices.length) {
+        // verifica se é necessario expandir o array
+        if (numVertices == (vertices.length - 1)) {
             expandCapacity();
         }
-        vertices[numVertices] = (V) vertex;
+
+        // adiciona o novo vertice
+        vertices[numVertices] = vertex;
+        numVertices++;
+
+        // garante que não existe aresta ligadas a este novo vertice
         for (int i = 0; i <= numVertices; i++) {
             adjMatrix[i][numVertices] = null;
             adjMatrix[numVertices][i] = null;
         }
-        numVertices++;
     }
 
 
@@ -160,22 +167,20 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      * @param vertex the vertex to be removed from this graph
      */
     @Override
-    public void removeVertex(V vertex) {
+    public void removeVertex(V vertex) throws IlegalArgumentException {
+        // obtem a posição do vertice
         int pos = getIndex(vertex);
+
+        // verifica se o vertice existe
         if (pos == -1) {
-            try {
-                throw new IlegalArgumentException("vertice não encontrado");
-            } catch (IlegalArgumentException e) {
-            }
+            throw new IlegalArgumentException("vertice não encontrado");
         }
+
         // percorrer a matriz para anular as arestas deste vertice
         for (int i = 0; i < vertices.length; i++) {
+            // remove a aresta caso exista
             if (this.adjMatrix[pos][i] != null) {
                 this.adjMatrix[pos][i] = null;
-                this.numEdges--;
-            }
-
-            if (this.adjMatrix[i][pos] != null) {
                 this.adjMatrix[i][pos] = null;
                 this.numEdges--;
             }
@@ -186,14 +191,13 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
             vertices[posV] = vertices[posV + 1];
         }
 
-
         for (int x = pos + 1; x < numVertices; x++) {
             for (int y = pos + 1; y < numVertices; y++) {
                 adjMatrix[x - 1][y - 1] = adjMatrix[x][y];
             }
         }
 
-
+        // atualiza o numero de vertices
         this.numVertices--;
     }
 
@@ -204,117 +208,126 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
      * @return
      */
     @Override
-    public Iterator<V> iteratorBFS(V startVertex) {
-        int vertPos = getIndex(startVertex);
+    public Iterator<V> iteratorBFS(V startVertex) throws IlegalArgumentException {
         Integer x;
+        int vertPos = getIndex(startVertex);
         LinkedQueue<Integer> transversalQueue = new LinkedQueue<Integer>();
         ArrayUnorderedList<V> resultList = new ArrayUnorderedList<V>(DEFAULT_CAPACITY);
 
-        try {
-            if (!this.indexIsValid(vertPos)) {
-                return resultList.iterator();
-            }
-        } catch (IlegalArgumentException e) {
+        // verifica se o vertice é valido
+        if (!this.indexIsValid(vertPos)) {
+            return resultList.iterator();
         }
 
+        // inicializa todos os vertices visitados a false
         boolean[] visited = new boolean[numVertices];
         for (int i = 0; i < numVertices; i++) {
             visited[i] = false;
         }
+
+        // adiciona o vertice de origem a queue e marca-o como visitado
         transversalQueue.enqueue(new Integer(vertPos));
         visited[vertPos] = true;
 
 
         try {
+            // faz a ação a seguir até a queue estar vazia
             while (!transversalQueue.isEmpty()) {
+                // obtem o elemento da queue e adiciona o vertice a lista final
                 x = transversalQueue.dequeue();
                 resultList.addToRear(vertices[x]);
 
-                /**
-                 * encontrar todos os vertices adjacentes de x que não foram visitados mas estão na QUEUE
-                 */
-
+                // encontra todos os vertices adjacentes de x que não foram visitados  e adiciona-os à queue
                 for (int i = 0; i < numVertices; i++) {
                     if (visited[i] != true && this.adjMatrix[x.intValue()][i] != null) {
                         transversalQueue.enqueue(new Integer(i));
                         visited[i] = true;
                     }
                 }
-
             }
         } catch (EmptyCollectionException e) {
             e.printStackTrace();
         }
+
+        // returna a lista de resultados
         return resultList.iterator();
     }
 
     @Override
-    public Iterator<V> iteratorDFS(V startVertex) throws EmptyCollectionException {
+    public Iterator<V> iteratorDFS(V startVertex) throws EmptyCollectionException, IlegalArgumentException {
         Integer x;
         boolean found;
         LinkedStack<Integer> transversalStack = new LinkedStack<Integer>();
         ArrayUnorderedList<V> resultList = new ArrayUnorderedList<V>(DEFAULT_CAPACITY);
-        boolean[] visited = new boolean[numVertices];
-        try {
-            if (!this.indexIsValid(getIndex(startVertex))) {
-                return resultList.iterator();
-            }
-        } catch (IlegalArgumentException e) {
+
+        // verifica se o vertice de origem é valido
+        if (!this.indexIsValid(getIndex(startVertex))) {
+            return resultList.iterator();
         }
 
+        // inicializa todos os vertices visitados a false
+        boolean[] visited = new boolean[numVertices];
         for (int i = 0; i < numVertices; i++) {
             visited[i] = false;
         }
+
+        // adiciona o vertice de origem a stack, a lista de resultados e marca-o como visitado
         transversalStack.push(new Integer(getIndex(startVertex)));
         resultList.addToRear(vertices[getIndex(startVertex)]);
         visited[getIndex(startVertex)] = true;
+
+        // faz a ação a seguir até a stack ficar vazia
         while (!transversalStack.isEmpty()) {
+            // obtem o elemento do topo da stack
             x = transversalStack.peek();
             found = false;
 
-
-            // find a vertex adjacent to x that hasn´t been visited
-            // and push it on the stack
-            for (int i = 0; i < (numVertices) && !found; i++) {
+            // adiciona todos os vertices adjacentes a X à stack e
+            // a lista de resultados
+            // e informa que foram encontrados adjacentes
+            for (int i = 0; (i < numVertices) && !found; i++) {
                 if (adjMatrix[x.intValue()][i] != null && !visited[i]) {
                     transversalStack.push(new Integer(i));
                     resultList.addToRear(vertices[i]);
+                    visited[i] = true;
                     found = true;
                 }
             }
+
+            // caso não tenha sido encontrado faz o pop da stack
             if (!found && !transversalStack.isEmpty()) {
                 transversalStack.pop();
             }
-            return resultList.iterator();
-
         }
-        return null;
+
+        // return a lista de resultados
+        return resultList.iterator();
     }
 
     @Override
     public Iterator iteratorShortestPath(V startVertex, V targetVertex) throws EmptyCollectionException, IlegalArgumentException, EmptyQueueException {
-        // Atributos usados na funcao encontrarMenorCaminho
-
         int index;
         double weight;
+        int endIndex = getIndex(targetVertex);
+        int startIndex = getIndex(startVertex);
         int[] predecessor = new int[this.numVertices];
+        StackADT<Integer> stack = new LinkedStack<Integer>();
         HeapADT<Double> traversalMinHeap = new LinkedHeap<Double>();
         ArrayUnorderedList<Integer> resultList = new ArrayUnorderedList<Integer>(DEFAULT_CAPACITY);
-        StackADT<Integer> stack = new LinkedStack<Integer>();
-        int startIndex = getIndex(startVertex);
-        int endIndex = getIndex(targetVertex);
 
-        int[] pathIndex = new int[this.numVertices];
+        // inicializa o array que contem a soma dos pesos a 0
         double[] pathWeight = new double[this.numVertices];
         for (int i = 0; i < this.numVertices; i++) {
             pathWeight[i] = Double.POSITIVE_INFINITY;
         }
 
+        // inicializa o array de vertices visitados a false
         boolean[] visited = new boolean[this.numVertices];
         for (int i = 0; i < this.numVertices; i++) {
             visited[i] = false;
         }
 
+        // verifica se os vertices são validos
         if (!this.indexIsValid(startIndex) || !this.indexIsValid(endIndex) || (startIndex == endIndex)) {
             return resultList.iterator();
         }
@@ -324,6 +337,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
         visited[startIndex] = true;
         weight = 0;
 
+        // adiciona os pesos dos vertices adjacentes ao array
         for (int i = 0; i < this.numVertices; i++) {
             if (!visited[i]) {
                 if (this.adjMatrix[startIndex][i] != null) {
@@ -392,7 +406,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
     }
 
     @Override
-    public boolean isempty() {
+    public boolean isEmpty() {
         if (numVertices == 0) {
             return true;
         }
@@ -400,9 +414,9 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
     }
 
     @Override
-    public boolean isConnected() {
+    public boolean isConnected() throws IlegalArgumentException {
         // Verifica se o grafo não está vazio
-        if (this.isempty()) {
+        if (this.isEmpty()) {
             try {
                 throw new EmptyCollectionException("O grafo está vazio!");
             } catch (EmptyCollectionException e) {
@@ -445,7 +459,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
     }
 
     @Override
-    public String tooString() {
+    public String toString() {
         String adjMatrixTooString = " ";
         System.out.print("   ");
         for (int pos = 0; pos < vertices.length; pos++) {
@@ -468,8 +482,6 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
                 }
                 adjMatrixTooString += "\n";
             }
-
-
         }
         return adjMatrixTooString;
     }
@@ -478,12 +490,12 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
     private void expandCapacity() {
         //redimensiona o array de vertices
         int oldVerticesLength = this.vertices.length;
-        V[] newVerteces = (V[]) new Object[this.vertices.length * 2];
+        V[] newVerteces = (V[]) (new Vertice[this.vertices.length * 2]);
         System.arraycopy(this.vertices, 0, newVerteces, 0, numVertices);
         this.vertices = newVerteces;
 
         //redimensiona a matriz adjacente
-        E[][] auxAdjMatrix = (E[][]) new Object[oldVerticesLength * 2][oldVerticesLength * 2];
+        E[][] auxAdjMatrix = (E[][]) new Aresta[oldVerticesLength * 2][oldVerticesLength * 2];
         for (int i = 0; i < oldVerticesLength; i++) {
             for (int x = 0; x < oldVerticesLength; x++) {
                 auxAdjMatrix[i][x] = adjMatrix[x][i];
