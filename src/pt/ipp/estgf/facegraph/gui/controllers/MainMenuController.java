@@ -11,7 +11,9 @@ import pt.ipp.estgf.facegraph.gui.Teste;
 import java.io.IOException;
 
 /**
- * Created by antoniomagalhaes on 16/01/15.
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
 public class MainMenuController extends MenuBar {
 
@@ -19,6 +21,27 @@ public class MainMenuController extends MenuBar {
     private MenuItem addPerson;
     @FXML
     private MenuItem addFriendShip;
+    @FXML
+    private MenuItem removePerson;
+    @FXML
+    private MenuItem enemies;
+    @FXML
+    private MenuItem biggerProximity;
+    @FXML
+    private MenuItem shortProximity;
+    @FXML
+    private MenuItem path;
+    @FXML
+    private MenuItem printData;
+    @FXML
+    private MenuItem printAll;
+    @FXML
+    private MenuItem habitants;
+    @FXML
+    private MenuItem graphMinHabitant;
+    @FXML
+    private MenuItem graphHabitant;
+
 
     public MainMenuController() {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../views/menu.fxml"));
@@ -46,6 +69,88 @@ public class MainMenuController extends MenuBar {
                 Teste.getInstance().setCenterNode(AddFriendshipController.getInstance());
             }
         });
+
+        // remover pessoa
+        this.removePerson.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(RemovePersonController.getInstance());
+            }
+        });
+
+        // inimigos
+        this.enemies.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(UnfriendController.getInstance());
+            }
+        });
+
+        // maior proximidade
+        this.biggerProximity.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(BiggerProximityController.getInstance());
+            }
+        });
+
+        // menor proximidade
+        this.shortProximity.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(ShortProximityController.getInstance());
+            }
+        });
+
+        // caminho
+        this.path.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(PathController.getInstance());
+            }
+        });
+
+        // imprimir dados da pessoa
+        this.printData.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(PrintPersonController.getInstance());
+            }
+        });
+
+
+        // imprimir tudo
+        this.printAll.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(PrintAllController.getInstance());
+            }
+        });
+
+        // imprime os habitantes de uma cidade
+        this.habitants.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(PrintHabitantsController.getInstance());
+            }
+        });
+
+        // grafo minimo de habitante
+        this.graphMinHabitant.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(GraphMinHabitantController.getInstance());
+            }
+        });
+
+        // grafo minimo de habitante
+        this.graphHabitant.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Teste.getInstance().setCenterNode(GraphHabitantController.getInstance());
+            }
+        });
+
     }
 
 }

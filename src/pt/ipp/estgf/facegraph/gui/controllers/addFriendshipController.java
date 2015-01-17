@@ -12,19 +12,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
-import sun.applet.Main;
 
-import javax.swing.text.html.parser.Parser;
 
 import java.io.IOException;
 
 /**
- * Created .
+ * Work done by:
+ * Antonio Magalhaes
+ * Pedro Fernandes
  */
-
 public class AddFriendshipController extends Pane {
 
     /**
@@ -74,6 +72,7 @@ public class AddFriendshipController extends Pane {
         this.person1.setItems(this.vertices);
         this.person2.setItems(this.vertices);
 
+
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -88,7 +87,7 @@ public class AddFriendshipController extends Pane {
 
                 try {
                     Teste.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue());
-                output.setText("Adicionado");
+                    output.setText("Adicionado");
                 } catch (IlegalArgumentException e) {
                     System.out.println("AQUI");
                 }

@@ -21,20 +21,21 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class PathController extends Pane {
+public class GraphMinHabitantController extends Pane {
+
     /**
      * Class instance.
      */
-    private static PathController instance;
+    private static GraphMinHabitantController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static PathController getInstance() {
+    public static GraphMinHabitantController getInstance() {
         if (instance == null) {
-            instance = new PathController();
+            instance = new GraphMinHabitantController();
         }
         return instance;
     }
@@ -51,10 +52,11 @@ public class PathController extends Pane {
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-    private PathController() {
+
+    private GraphMinHabitantController() {
 
         // loads the view
-        FXMLLoader loader = new FXMLLoader(PathController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(GraphMinHabitantController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -70,6 +72,8 @@ public class PathController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
+
                 try {
                     Teste.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue());
                     output.setText("Adicionado");
@@ -79,4 +83,5 @@ public class PathController extends Pane {
             }
         });
     }
+
 }

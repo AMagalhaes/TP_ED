@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutY="55.0" prefHeight="332.0" prefWidth="589.0">
+         <children>
+            <TextArea fx:id="output" prefHeight="320.0" prefWidth="569.0">
+               <VBox.margin>
+                  <Insets left="15.0" right="5.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+   </children>
+</fx:root>
