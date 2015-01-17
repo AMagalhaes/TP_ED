@@ -64,7 +64,7 @@ public class AddPersonController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Teste.getInstance().getGrath().addVertex(new Vertice(personName.getText(), personCity.getText()));
-                output.setText("Foi criada a pessao");
+                output.setText("Foi criada a pessoa");
             }
 
         });

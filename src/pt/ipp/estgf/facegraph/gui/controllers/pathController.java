@@ -70,12 +70,9 @@ public class PathController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                try {
-                    Teste.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue());
-                    output.setText("Adicionado");
-                } catch (IlegalArgumentException e) {
-                    System.out.println("AQUI");
-                }
+
+                output.setText(String.valueOf(Teste.getInstance().getGrath().
+
             }
         });
     }

@@ -53,10 +53,12 @@ public class Vertice implements VertexInterface {
 
     }
 
+
     @Override
     public String toString() {
         return nome;
     }
+
 
     @Override
     public boolean equals(Object o) {
