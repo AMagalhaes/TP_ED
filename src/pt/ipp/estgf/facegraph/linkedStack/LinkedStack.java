@@ -41,7 +41,7 @@ public class LinkedStack<T> implements StackADT<T> {
         }
 
         No aux = no;
-        no = aux;
+        no = aux.getProximo();
 
         // Decrements the size
         this.size--;
@@ -57,10 +57,10 @@ public class LinkedStack<T> implements StackADT<T> {
     @Override
     public T peek() throws EmptyCollectionException {
         if (!isEmpty()) {
-            System.out.println("o elemento do topo da stack é " + no);
-
+           // System.out.println("o elemento do topo da stack é " + no);
+            return (T)no.getElemento();
         }
-        return null;
+       throw new EmptyCollectionException("Lista vazia");
     }
 
     /**
