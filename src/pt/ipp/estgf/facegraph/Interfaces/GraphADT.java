@@ -67,7 +67,7 @@ public interface GraphADT<T> {
      * @param startVertex the starting vertex
      * @return a depth first iterator starting at the given vertex
      */
-    public Iterator iteratorDFS(T startVertex) throws EmptyCollectionException;
+    public Iterator iteratorDFS(T startVertex) throws EmptyCollectionException, IlegalArgumentException;
 
 
     /**
@@ -109,5 +109,5 @@ public interface GraphADT<T> {
      *
      * @return a string representation of the adjacent matrix
      */
-    public String tooString();
+    public String toString();
 }

@@ -1,11 +1,11 @@
 package pt.ipp.estgf.facegraph;
 
+import pt.ipp.estgf.facegraph.Interfaces.UnorderedList;
 import pt.ipp.estgf.facegraph.entities.Aresta;
 import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.views.RootLayout;
 
 import java.util.Iterator;
 
@@ -20,7 +20,6 @@ public class Demo {
 
     public static void main(String[] args) throws IlegalArgumentException, EmptyCollectionException, EmptyQueueException {
         FaceNetwork<Vertice, Aresta> grafo = new FaceNetwork();
-        RootLayout r = new RootLayout();
         Vertice vert1 = new Vertice("A", "mondim");
         Vertice vert2 = new Vertice("B", "celorico");
         Vertice vert3 = new Vertice("C", "lixa");
@@ -29,6 +28,9 @@ public class Demo {
         Vertice vert6 = new Vertice("F", "porto");
         Vertice vert7 = new Vertice("G", "braga");
         Vertice vert8 = new Vertice("H", "odivelas");
+        Vertice vert9 = new Vertice("AA", "mondim");
+        Vertice vert10 = new Vertice("AB", "mondim");
+        Vertice vert11 = new Vertice("AC", "mondim");
 
         grafo.addVertex(vert1);
         grafo.addVertex(vert2);
@@ -38,6 +40,9 @@ public class Demo {
         grafo.addVertex(vert6);
         grafo.addVertex(vert7);
         grafo.addVertex(vert8);
+        grafo.addVertex(vert9);
+        grafo.addVertex(vert10);
+        grafo.addVertex(vert11);
 
         // Aresta edge1 = new Aresta(vert1, vert2, 3);
         grafo.addEdge(vert1, vert2, 8);
@@ -50,24 +55,44 @@ public class Demo {
         grafo.addEdge(vert7, vert8, 7);
         grafo.addEdge(vert7, vert3, 1);
 
+        grafo.addEdge(vert1, vert10, 1);
+        grafo.addEdge(vert9, vert1, 1);
+        grafo.addEdge(vert6, vert11, 1);
+        grafo.addEdge(vert10, vert11, 1);
+        grafo.addEdge(vert10, vert9, 1);
 
 
 
 
-        System.out.println(grafo.tooString());
+
+        System.out.println(grafo.toString());
         // grafo.removeVertex("D");
 
 
         System.out.println(" caminho +C :" + grafo.shortestPathWeight(vert2, vert7));
-        System.out.println(" caminho +L :" + grafo.longestPathWeight(vert1, vert7));
+       // System.out.println(" caminho +L :" + grafo.longestPathWeight(vert1, vert7));
 
         Iterator it = grafo.iteratorBFS(vert1);
+        System.out.print("\n BFS: ");
+        Vertice a;
        while(it.hasNext()){
-           System.out.println(it.hasNext());
+          a = (Vertice) it.next();
+           System.out.print(" " + a);
            it.next();
        }
+        System.out.println("\n");
+ /**
 
 
+        Iterator itDFS = grafo.iteratorDFS(vert1);
+        System.out.print("\n DFS: ");
+        Vertice aDFS;
+        while(itDFS.hasNext()){
+            aDFS = (Vertice) itDFS.next();
+            System.out.print(" " + aDFS);
+            itDFS.next();
+        }*/
+        System.out.println("\n");
 
         grafo.imprimeDados("A");
         System.out.println(".....|Imprime tudo ........ \n");
@@ -75,13 +100,14 @@ public class Demo {
         System.out.println(" a cidade tem " + grafo.habitantesCidade("mondim") + "habitantes");
 
         System.out.println("::::::::::::::::::::::::::::::::::::::::");
-       // System.out.println(grafo.grafoHabitantesMinimo());
+       //System.out.println(grafo.grafoHabitantesMinimo());
 
-        FaceNetwork count = grafo.grafoHabitantesMinimo();
-        for (int i = 0; i <count.numVertices; i++) {
-                System.out.println(" " + count.vertices[i]);
 
-        }
+        //System.out.println(grafo.grafoHabitantesMinimo("mondim").toString());
+        /*for (int i = 0; i <count.numVertices; i++) {
+                System.out.println("graHabMin : " + count.vertices[i]);
+
+        }*/
         System.out.println("Amigos : " + grafo.caminho(vert1, vert3));
     }
 

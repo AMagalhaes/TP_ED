@@ -29,9 +29,8 @@ public class LinkedStack<T> implements StackADT<T> {
         } else {
             aux.setProximo(no);
             no = aux;
-            size++;
         }
-
+        size++;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class LinkedStack<T> implements StackADT<T> {
             throw new EmptyCollectionException("Lista Vazia");
         }
 
-        No aux = no.getProximo();
+        No aux = no;
         no = aux;
 
         // Decrements the size
@@ -84,7 +83,6 @@ public class LinkedStack<T> implements StackADT<T> {
      */
     @Override
     public int size() {
-
         return size;
     }
 
