@@ -33,7 +33,7 @@ public interface GraphADT<T> {
      *
      * @param vertex the vertex to be removed from this graph
      */
-    public void removeVertex(T vertex);
+    public void removeVertex(T vertex) throws IlegalArgumentException;
 
 
     /**
@@ -50,7 +50,7 @@ public interface GraphADT<T> {
      * @param vertex1 the first vertex
      * @param vertex2 the second vertex
      */
-    public void removeEdge(T vertex1, T vertex2);
+    public void removeEdge(T vertex1, T vertex2) throws IlegalArgumentException;
 
 
     /**
@@ -59,7 +59,7 @@ public interface GraphADT<T> {
      * @param startVertex he starting vertex
      * @return a bredth first iterator beginning at the given vertex
      */
-    public Iterator iteratorBFS(T startVertex);
+    public Iterator iteratorBFS(T startVertex) throws IlegalArgumentException;
 
     /**
      * Returns a depth first iterator starting with the given vertex
@@ -85,7 +85,7 @@ public interface GraphADT<T> {
      *
      * @return true if the graph is empty
      */
-    public boolean isempty();
+    public boolean isEmpty();
 
 
     /**
@@ -93,7 +93,7 @@ public interface GraphADT<T> {
      *
      * @return true if the graph is connected
      */
-    public boolean isConnected();
+    public boolean isConnected() throws IlegalArgumentException;
 
 
     /**
