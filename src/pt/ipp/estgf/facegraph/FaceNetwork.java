@@ -4,6 +4,7 @@ import pt.ipp.estgf.facegraph.Heap.LinkedHeap;
 import pt.ipp.estgf.facegraph.Interfaces.*;
 import pt.ipp.estgf.facegraph.entities.Aresta;
 import pt.ipp.estgf.facegraph.entities.Vertice;
+import pt.ipp.estgf.facegraph.exceptions.EmptyUnorderListException;
 import pt.ipp.estgf.facegraph.lists.ArrayOrderedList;
 import pt.ipp.estgf.facegraph.lists.ArrayUnorderedList;
 import pt.ipp.estgf.facegraph.Interfaces.EdgeInterface;
@@ -38,14 +39,12 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
      */
     @Override
     public void addEdge(V vertex1, V vertex2, double weight) throws IlegalArgumentException {
+        // verifica se o peso é valido
         if (weight < 0.0) {
-            try {
-                throw new IlegalArgumentException("o peso da aresta tem que ser > 0.0");
-            } catch (IlegalArgumentException e) {
-            }
+            throw new IlegalArgumentException("o peso da aresta tem que ser > 0.0");
         }
 
-        // Criar a aresta
+        // criar a aresta no grafo
         super.addEdge(vertex1, vertex2);
 
         // define o peso da aresta
@@ -60,23 +59,24 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
      */
     @Override
     public double shortestPathWeight(V src, V dest) {
-        // Atributos usados na funcao encontrarMenorCaminho
-        double result = 0;
         V temp = src;
         V temp2 = null;
+        double result = 0;
 
         try {
+            // obtem a lista de vertices do caminho mais curto
             Iterator iterator = super.iteratorShortestPath(src, dest);
-            ArrayUnorderedList tempList = new ArrayUnorderedList(DEFAULT_CAPACITY);
 
-            while (iterator.hasNext()) {
-                tempList.addToRear(iterator.next());
+            // obtem o primeiro vertice
+            if (iterator.hasNext()) {
+                temp = this.vertices[(Integer) iterator.next()];
+            } else {
+                return result;
             }
 
-            iterator = tempList.iterator();
-
             while (iterator.hasNext()) {
-                temp2 = (V) this.vertices[(Integer) iterator.next()];
+                // obtem o proximo vertice
+                temp2 = this.vertices[(Integer) iterator.next()];
                 result += this.getEdgeWeight(temp, temp2);
                 temp = temp2;
             }
@@ -87,7 +87,6 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         } catch (EmptyQueueException e) {
             e.printStackTrace();
         }
-
 
         return result;
     }
@@ -101,7 +100,12 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     public double getEdgeWeight(V vertex1, V vertex2) {
         int vPos1 = super.getIndex(vertex1);
         int vPos2 = super.getIndex(vertex2);
-        return super.adjMatrix[vPos1][vPos2].getWeight();
+
+        if (super.adjMatrix[vPos1][vPos2] != null) {
+            return super.adjMatrix[vPos1][vPos2].getWeight();
+        } else {
+            return Double.POSITIVE_INFINITY;
+        }
     }
 
     /**
@@ -171,32 +175,30 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
     public Iterator iteratorLongestPath(V startVertex, V targetVertex) throws EmptyCollectionException, IlegalArgumentException, EmptyQueueException {
-        // Atributos usados na funcao encontrarMenorCaminho
-
         int index;
         double weight;
-        int[] predecessor = new int[this.numVertices];
-        ArrayOrderedList<Double> orderedArray = new ArrayOrderedList<Double>();
-        ArrayUnorderedList<Integer> resultList = new ArrayUnorderedList<Integer>(DEFAULT_CAPACITY);
-        StackADT<Integer> stack = new LinkedStack<Integer>();
-        int startIndex = getIndex(startVertex);
         int endIndex = getIndex(targetVertex);
+        int startIndex = getIndex(startVertex);
+        int[] predecessor = new int[this.numVertices];
+        StackADT<Integer> stack = new LinkedStack<Integer>();
+        OrderedListADT<Double> unArrayList = new ArrayOrderedList<Double>();
+        ArrayUnorderedList<Integer> resultList = new ArrayUnorderedList<Integer>(DEFAULT_CAPACITY);
 
-        // valida os vertices fornecidos
-        if (!this.indexIsValid(startIndex) || !this.indexIsValid(endIndex) || (startIndex == endIndex)) {
-            return resultList.iterator();
-        }
-
-        // inicializa o array de pesos
+        // inicializa o array que contem a soma dos pesos a 0
         double[] pathWeight = new double[this.numVertices];
         for (int i = 0; i < this.numVertices; i++) {
             pathWeight[i] = Double.NEGATIVE_INFINITY;
         }
 
-        // inicializa o arrays de vertices visitados
+        // inicializa o array de vertices visitados a false
         boolean[] visited = new boolean[this.numVertices];
         for (int i = 0; i < this.numVertices; i++) {
             visited[i] = false;
+        }
+
+        // verifica se os vertices são validos
+        if (!this.indexIsValid(startIndex) || !this.indexIsValid(endIndex) || (startIndex == endIndex)) {
+            return resultList.iterator();
         }
 
         pathWeight[startIndex] = 0;
@@ -204,8 +206,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         visited[startIndex] = true;
         weight = 0;
 
-        // percorre todos os vertices adjacentes à origem
-        // de forma a fazer a soma dos pesos
+        // adiciona os pesos dos vertices adjacentes ao array
         for (int i = 0; i < this.numVertices; i++) {
             if (!visited[i]) {
                 if (this.adjMatrix[startIndex][i] != null) {
@@ -215,45 +216,45 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
                 }
 
                 predecessor[i] = startIndex;
-                orderedArray.add(new Double(pathWeight[i]));
+                unArrayList.add(pathWeight[i]);
             }
         }
 
         do {
             try {
-                weight = (orderedArray.removeLast()).doubleValue();
-            } catch (EmptyCollectionException ex) {
+                weight = unArrayList.removeLast();
+            } catch (EmptyUnorderListException e) {
+                e.printStackTrace();
             }
-            orderedArray.removeAll();
+            unArrayList = new ArrayOrderedList<Double>();
 
             if (weight == Double.NEGATIVE_INFINITY) {
                 return resultList.iterator();
             } else {
-                index = super.getIndexOfTheVertice(pathWeight, weight, visited);
-
+                index = getIndexOfTheVertice(pathWeight, weight, visited);
                 visited[index] = true;
             }
 
             for (int i = 0; i < this.numVertices; i++) {
                 if (this.adjMatrix[index][i] == null) {
                     if (!visited[i]) {
-                        orderedArray.add(new Double(pathWeight[i]));
+                        unArrayList.add(pathWeight[i]);
                     }
 
                     continue;
                 }
 
                 if (!visited[i]) {
-                    if ((this.adjMatrix[index][i].getWeight() > Double.NEGATIVE_INFINITY) && (pathWeight[index] + this.adjMatrix[index][i].getWeight()) > pathWeight[i]) {
+                    if ((this.adjMatrix[index][i] != null) && (pathWeight[index] + this.adjMatrix[index][i].getWeight()) > pathWeight[i]) {
                         pathWeight[i] = pathWeight[index] + this.adjMatrix[index][i].getWeight();
                         predecessor[i] = index;
                     }
 
-                    orderedArray.add(new Double(pathWeight[i]));
+                    unArrayList.add(pathWeight[i]);
                 }
             }
 
-        } while (!orderedArray.isEmpty() && !visited[endIndex]);
+        } while (!unArrayList.isEmpty());
 
         index = endIndex;
         stack.push(new Integer(index));
@@ -274,23 +275,23 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
     public double longestPathWeight(V src, V dest) {
-        // Atributos usados na funcao encontrarMenorCaminho
-        double result = 0;
         V temp = src;
         V temp2 = null;
+        double result = 0;
 
         try {
+            // calcula o o caminho mais longo
             Iterator iterator = this.iteratorLongestPath(src, dest);
-            ArrayUnorderedList tempList = new ArrayUnorderedList(DEFAULT_CAPACITY);
 
-            while (iterator.hasNext()) {
-                tempList.addToRear(iterator.next());
+            // obtem o primeiro vertice
+            if (iterator.hasNext()) {
+                temp = this.vertices[(Integer) iterator.next()];
+            } else {
+                return result;
             }
 
-            iterator = tempList.iterator();
-
             while (iterator.hasNext()) {
-                temp2 = (V) this.vertices[(Integer) iterator.next()];
+                temp2 = this.vertices[(Integer) iterator.next()];
                 result += this.getEdgeWeight(temp, temp2);
                 temp = temp2;
             }
@@ -301,7 +302,6 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         } catch (EmptyQueueException e) {
             e.printStackTrace();
         }
-
 
         return result;
     }
@@ -315,7 +315,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         HeapADT<Double> miniHeap
                 = new LinkedHeap<Double>();
         FaceNetwork<V, E> resultGraph = new FaceNetwork<V, E>();
-        if (isempty() || isConnected()) {
+        if (isEmpty() || isConnected()) {
             return resultGraph;
         }
         for (int i = 0; i < numVertices; i++) {
@@ -342,7 +342,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         while ((resultGraph.size() < this.size()) && !miniHeap.isEmpty()) {
             do {
                 weight = (miniHeap.removeMin()).doubleValue();
-                edge = getWithWeightOff(weight, visited);
+                edge = getEdgeWithWeightOf(weight, visited);
             } while (indexIsValid(edge[0]) || !indexIsValid(edge[1]));
             x = edge[0];
             y = edge[1];
@@ -374,13 +374,11 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
 
-    protected int[] getEdgeWithWeightOf(double weight, boolean[] visited)
-    {
+    protected int[] getEdgeWithWeightOf(double weight, boolean[] visited) {
         int[] edge = new int[2];
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
-                if (super.adjMatrix[i][j] != null && (super.adjMatrix[i][j].getWeight() == weight) && (visited[i] ^ visited[j]))
-                {
+                if (super.adjMatrix[i][j] != null && (super.adjMatrix[i][j].getWeight() == weight) && (visited[i] ^ visited[j])) {
                     edge[0] = i;
                     edge[1] = j;
                     return edge;
@@ -413,7 +411,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
 
-    protected boolean caminho(V startVertex, V targetVertex) throws IlegalArgumentException, EmptyQueueException, EmptyCollectionException {
+    public boolean caminho(V startVertex, V targetVertex) throws IlegalArgumentException, EmptyQueueException, EmptyCollectionException {
         if (indexIsValid(getIndex(startVertex)) && indexIsValid(getIndex(targetVertex))) {
             // verifica caminho directo,ligados por uma aresta
             if (adjMatrix[getIndex(startVertex)][getIndex(targetVertex)] != null)

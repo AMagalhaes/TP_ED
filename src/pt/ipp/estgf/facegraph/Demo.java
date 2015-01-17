@@ -20,78 +20,46 @@ public class Demo {
 
     public static void main(String[] args) throws IlegalArgumentException, EmptyCollectionException, EmptyQueueException {
         FaceNetwork<Vertice, Aresta> grafo = new FaceNetwork();
-        Vertice vert1 = new Vertice("A", "mondim");
-        Vertice vert2 = new Vertice("B", "celorico");
-        Vertice vert3 = new Vertice("C", "lixa");
-        Vertice vert4 = new Vertice("D", "felgueiras");
-        Vertice vert5 = new Vertice("E", "vila real");
-        Vertice vert6 = new Vertice("F", "porto");
-        Vertice vert7 = new Vertice("G", "braga");
-        Vertice vert8 = new Vertice("H", "odivelas");
-        Vertice vert9 = new Vertice("AA", "mondim");
-        Vertice vert10 = new Vertice("AB", "mondim");
-        Vertice vert11 = new Vertice("AC", "mondim");
+        Vertice vert0 = new Vertice("A", "mondim");
+        Vertice vert1 = new Vertice("B", "celorico");
+        Vertice vert2 = new Vertice("C", "lixa");
+        Vertice vert3 = new Vertice("D", "felgueiras");
+        Vertice vert4 = new Vertice("E", "vila real");
+        Vertice vert5 = new Vertice("F", "porto");
+        Vertice vert6 = new Vertice("G", "braga");
 
+        grafo.addVertex(vert0);
         grafo.addVertex(vert1);
         grafo.addVertex(vert2);
         grafo.addVertex(vert3);
         grafo.addVertex(vert4);
         grafo.addVertex(vert5);
         grafo.addVertex(vert6);
-        grafo.addVertex(vert7);
-        grafo.addVertex(vert8);
-        grafo.addVertex(vert9);
-        grafo.addVertex(vert10);
-        grafo.addVertex(vert11);
 
-        // Aresta edge1 = new Aresta(vert1, vert2, 3);
-        grafo.addEdge(vert1, vert2, 8);
-        grafo.addEdge(vert1, vert8, 8);
-        grafo.addEdge(vert2, vert3, 3);
+        grafo.addEdge(vert0, vert1, 8);
+        grafo.addEdge(vert1, vert2, 3);
+        grafo.addEdge(vert2, vert3, 8);
         grafo.addEdge(vert3, vert4, 8);
         grafo.addEdge(vert4, vert5, 8);
-        grafo.addEdge(vert5, vert6, 8);
-        grafo.addEdge(vert6, vert7, 5);
-        grafo.addEdge(vert7, vert8, 7);
-        grafo.addEdge(vert7, vert3, 1);
+        grafo.addEdge(vert5, vert6, 5);
+        grafo.addEdge(vert6, vert0, 1);
 
-        grafo.addEdge(vert1, vert10, 1);
-        grafo.addEdge(vert9, vert1, 1);
-        grafo.addEdge(vert6, vert11, 1);
-        grafo.addEdge(vert10, vert11, 1);
-        grafo.addEdge(vert10, vert9, 1);
+        grafo.addEdge(vert0, vert4, 30);
+        grafo.addEdge(vert6, vert2, 30);
+        grafo.addEdge(vert6, vert3, 30);
 
-
-
-
-
-        System.out.println(grafo.toString());
-        // grafo.removeVertex("D");
-
-
-        System.out.println(" caminho +C :" + grafo.shortestPathWeight(vert2, vert7));
-       // System.out.println(" caminho +L :" + grafo.longestPathWeight(vert1, vert7));
-
-        Iterator it = grafo.iteratorBFS(vert1);
-        System.out.print("\n BFS: ");
-        Vertice a;
-       while(it.hasNext()){
-          a = (Vertice) it.next();
-           System.out.print(" " + a);
-           it.next();
-       }
+        // imprime o LongestPath
+        Iterator it = grafo.iteratorLongestPath(vert0, vert6);
+        System.out.print("\n LongestPath: ");
+        while (it.hasNext()) {
+            System.out.print(" " + it.next());
+        }
         System.out.println("\n");
- /**
 
+        // comprimento do caminho mais curto
+        System.out.println("\n caminho +L :" + grafo.longestPathWeight(vert0, vert6));
 
-        Iterator itDFS = grafo.iteratorDFS(vert1);
-        System.out.print("\n DFS: ");
-        Vertice aDFS;
-        while(itDFS.hasNext()){
-            aDFS = (Vertice) itDFS.next();
-            System.out.print(" " + aDFS);
-            itDFS.next();
-        }*/
+        /*
         System.out.println("\n");
 
         grafo.imprimeDados("A");
@@ -100,7 +68,7 @@ public class Demo {
         System.out.println(" a cidade tem " + grafo.habitantesCidade("mondim") + "habitantes");
 
         System.out.println("::::::::::::::::::::::::::::::::::::::::");
-       //System.out.println(grafo.grafoHabitantesMinimo());
+        //System.out.println(grafo.grafoHabitantesMinimo());
 
 
         //System.out.println(grafo.grafoHabitantesMinimo("mondim").toString());
@@ -108,7 +76,7 @@ public class Demo {
                 System.out.println("graHabMin : " + count.vertices[i]);
 
         }*/
-        System.out.println("Amigos : " + grafo.caminho(vert1, vert3));
+      //  System.out.println("Amigos : " + grafo.caminho(vert1, vert3));*/
     }
 
 
