@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,9 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
@@ -22,40 +22,41 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class ShortProximityController extends Pane {
+public class GraphMinHabitantController extends Pane {
 
     /**
-     * Classe instance
+     * Class instance.
      */
-    private static ShortProximityController instance;
+    private static GraphMinHabitantController instance;
 
     /**
-     * Get the class instance
+     * Get the class instance.
+     *
+     * @return
      */
-    public static ShortProximityController getInstance() {
+    public static GraphMinHabitantController getInstance() {
         if (instance == null) {
-            instance = new ShortProximityController();
+            instance = new GraphMinHabitantController();
         }
-
         return instance;
     }
 
 
     @FXML
-    private ChoiceBox<VertexInterface> person1;
-    @FXML
-    private ChoiceBox<VertexInterface> person2;
-    @FXML
-    private TextArea output;
+    private ChoiceBox<VertexInterface> city;
     @FXML
     private Button buttonConfirm;
+    @FXML
+    private TextArea output;
 
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-    private ShortProximityController() {
+
+    private GraphMinHabitantController() {
+
         // loads the view
-        FXMLLoader loader = new FXMLLoader(ShortProximityController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(PrintHabitantsController.class.getResource("../views/city.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -65,16 +66,24 @@ public class ShortProximityController extends Pane {
             throw new RuntimeException(ex);
         }
 
-        this.person1.setItems(this.vertices);
-        this.person2.setItems(this.vertices);
+
+
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
-              output.setText(String.valueOf(Teste.getInstance().getGrath().shortestPathWeight(person1.getValue(), person2.getValue())));
+                try {
+                    output.setText(String.valueOf(Teste.getInstance().getGrath().grafoHabitantesMinimo()));
+                } catch (EmptyCollectionException e) {
+                    e.printStackTrace();
+                } catch (IlegalArgumentException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
+
 }

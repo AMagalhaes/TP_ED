@@ -12,7 +12,7 @@ import pt.ipp.estgf.facegraph.FaceNetwork;
 import pt.ipp.estgf.facegraph.entities.Aresta;
 import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.controllers.MainMenuController;
+import pt.ipp.estgf.facegraph.gui.controllersss.MainMenuController;
 
 import java.io.IOException;
 

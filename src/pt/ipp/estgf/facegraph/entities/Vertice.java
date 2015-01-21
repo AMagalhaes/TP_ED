@@ -58,38 +58,6 @@ public class Vertice implements VertexInterface {
 
     }
 
-
-    public String[] getCidades(){
-        UnorderedList<String> cidades = new ArrayUnorderedList<>();
-        Iterator<String> iter;
-        String[] result;
-        boolean encontra;
-
-        for (int i = 0; i < this.getCidades().length; i++){
-            encontra = false;
-            iter = cidades.iterator();
-
-            while (iter.hasNext()){
-                  if (iter.next().equals(this.))
-                      encontra = true;
-                break;
-            }
-        }
-        if(!encontra){
-         cidades.addToFront(this.);
-        }
-    }
-
-    /*
-
-                if (it.next().equals(this.vertices[index].getCidade())) {
-
-                allCidades.addToFront(this.vertices[index].getCidade());
-
-    */
-
-
-
     @Override
     public String toString() {
         return nome;

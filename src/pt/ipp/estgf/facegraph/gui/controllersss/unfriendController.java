@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
 import java.io.IOException;
@@ -20,37 +21,42 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class PrintHabitantsController extends Pane {
+public class UnfriendController extends Pane {
+
     /**
      * Class instance.
      */
-    private static PrintHabitantsController instance;
+    private static UnfriendController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static PrintHabitantsController getInstance() {
+    public static UnfriendController getInstance() {
         if (instance == null) {
-            instance = new PrintHabitantsController();
+            instance = new UnfriendController();
         }
         return instance;
     }
 
     @FXML
-    private ChoiceBox<VertexInterface> city;
+    private ChoiceBox<VertexInterface> person1;
     @FXML
-    private Button buttonConfirm;
+    private ChoiceBox<VertexInterface> person2;
     @FXML
     private TextArea output;
+    @FXML
+    private Button buttonConfirm;
 
-    //lista com as cidades
+
+    // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-    private PrintHabitantsController() {
+
+    private UnfriendController() {
         // loads the view
-        FXMLLoader loader = new FXMLLoader(PrintHabitantsController.class.getResource("../views/city.fxml"));
+        FXMLLoader loader = new FXMLLoader(UnfriendController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -60,19 +66,19 @@ public class PrintHabitantsController extends Pane {
             throw new RuntimeException(ex);
         }
 
-        this.city.setItems(this.vertices);
-
+        this.person1.setItems(this.vertices);
+        this.person2.setItems(this.vertices);
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                try {
+                    Teste.getInstance().getGrath().removeEdge(person1.getValue(), person2.getValue());
+                } catch (IlegalArgumentException e) {
+                    System.out.println("Foi removida a amizade");
+                }
 
-
-                Teste.getInstance().getGrath().addVertex(city.getValue());
-
-                output.setText("Adicionado");
             }
         });
     }
-
 }

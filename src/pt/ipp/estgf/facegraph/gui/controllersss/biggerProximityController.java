@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,26 +20,30 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class PrintPersonController extends Pane {
-    /**
-     * Classe instance
-     */
-    private static PrintPersonController instance;
+public class BiggerProximityController extends Pane {
+
 
     /**
-     * Get the class instance
+     * Class instance.
      */
-    public static PrintPersonController getInstance() {
+    private static BiggerProximityController instance;
+
+    /**
+     * Get the class instance.
+     *
+     * @return
+     */
+    public static BiggerProximityController getInstance() {
         if (instance == null) {
-            instance = new PrintPersonController();
+            instance = new BiggerProximityController();
         }
-
         return instance;
     }
 
-
     @FXML
     private ChoiceBox<VertexInterface> person1;
+    @FXML
+    private ChoiceBox<VertexInterface> person2;
     @FXML
     private TextArea output;
     @FXML
@@ -48,9 +52,11 @@ public class PrintPersonController extends Pane {
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-    private PrintPersonController() {
+
+    private BiggerProximityController() {
+
         // loads the view
-        FXMLLoader loader = new FXMLLoader(PrintPersonController.class.getResource("../views/person.fxml"));
+        FXMLLoader loader = new FXMLLoader(BiggerProximityController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -61,16 +67,16 @@ public class PrintPersonController extends Pane {
         }
 
         this.person1.setItems(this.vertices);
+        this.person2.setItems(this.vertices);
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
-                output.setText(String.valueOf(Teste.getInstance().getGrath().imprimeDados(person1.getValue())));
+                output.setText(String.valueOf(Teste.getInstance().getGrath().longestPathWeight(person1.getValue(), person2.getValue())));
 
             }
         });
     }
 }
-

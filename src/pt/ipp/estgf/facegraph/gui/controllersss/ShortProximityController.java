@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,25 +20,24 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class BiggerProximityController extends Pane {
-
-
-    /**
-     * Class instance.
-     */
-    private static BiggerProximityController instance;
+public class ShortProximityController extends Pane {
 
     /**
-     * Get the class instance.
-     *
-     * @return
+     * Classe instance
      */
-    public static BiggerProximityController getInstance() {
+    private static ShortProximityController instance;
+
+    /**
+     * Get the class instance
+     */
+    public static ShortProximityController getInstance() {
         if (instance == null) {
-            instance = new BiggerProximityController();
+            instance = new ShortProximityController();
         }
+
         return instance;
     }
+
 
     @FXML
     private ChoiceBox<VertexInterface> person1;
@@ -52,11 +51,9 @@ public class BiggerProximityController extends Pane {
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-
-    private BiggerProximityController() {
-
+    private ShortProximityController() {
         // loads the view
-        FXMLLoader loader = new FXMLLoader(BiggerProximityController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(ShortProximityController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -74,8 +71,7 @@ public class BiggerProximityController extends Pane {
             public void handle(ActionEvent actionEvent) {
 
 
-                output.setText(String.valueOf(Teste.getInstance().getGrath().longestPathWeight(person1.getValue(), person2.getValue())));
-
+              output.setText(String.valueOf(Teste.getInstance().getGrath().shortestPathWeight(person1.getValue(), person2.getValue())));
             }
         });
     }

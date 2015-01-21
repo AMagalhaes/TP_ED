@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class PrintAllController extends Pane {
+class PrintAllController extends Pane {
 
     /**
      * Class instance.

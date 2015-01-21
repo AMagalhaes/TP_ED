@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +11,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
-import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
 import java.io.IOException;
@@ -22,25 +20,23 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class GraphMinHabitantController extends Pane {
-
+public class PrintHabitantsController extends Pane {
     /**
      * Class instance.
      */
-    private static GraphMinHabitantController instance;
+    private static PrintHabitantsController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static GraphMinHabitantController getInstance() {
+    public static PrintHabitantsController getInstance() {
         if (instance == null) {
-            instance = new GraphMinHabitantController();
+            instance = new PrintHabitantsController();
         }
         return instance;
     }
-
 
     @FXML
     private ChoiceBox<VertexInterface> city;
@@ -49,12 +45,10 @@ public class GraphMinHabitantController extends Pane {
     @FXML
     private TextArea output;
 
-    // lista com todos os vertices
+    //lista com as cidades
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
-
-    private GraphMinHabitantController() {
-
+    private PrintHabitantsController() {
         // loads the view
         FXMLLoader loader = new FXMLLoader(PrintHabitantsController.class.getResource("../views/city.fxml"));
         loader.setRoot(this);
@@ -66,7 +60,7 @@ public class GraphMinHabitantController extends Pane {
             throw new RuntimeException(ex);
         }
 
-
+        this.city.setItems(this.vertices);
 
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,14 +68,9 @@ public class GraphMinHabitantController extends Pane {
             public void handle(ActionEvent actionEvent) {
 
 
-                try {
-                    output.setText(String.valueOf(Teste.getInstance().getGrath().grafoHabitantesMinimo()));
-                } catch (EmptyCollectionException e) {
-                    e.printStackTrace();
-                } catch (IlegalArgumentException e) {
-                    e.printStackTrace();
-                }
+                Teste.getInstance().getGrath().addVertex(city.getValue());
 
+                output.setText("Adicionado");
             }
         });
     }

@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,42 +21,39 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class UnfriendController extends Pane {
+class RemovePersonController extends Pane {
 
     /**
-     * Class instance.
+     * Classe instance
      */
-    private static UnfriendController instance;
+    private static RemovePersonController instance;
 
     /**
-     * Get the class instance.
-     *
-     * @return
+     * Get the class instance
      */
-    public static UnfriendController getInstance() {
+    public static RemovePersonController getInstance() {
         if (instance == null) {
-            instance = new UnfriendController();
+            instance = new RemovePersonController();
         }
+
         return instance;
     }
 
+
     @FXML
     private ChoiceBox<VertexInterface> person1;
-    @FXML
-    private ChoiceBox<VertexInterface> person2;
     @FXML
     private TextArea output;
     @FXML
     private Button buttonConfirm;
 
-
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
 
+    private RemovePersonController() {
 
-    private UnfriendController() {
         // loads the view
-        FXMLLoader loader = new FXMLLoader(UnfriendController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(RemovePersonController.class.getResource("../views/person.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -67,15 +64,14 @@ public class UnfriendController extends Pane {
         }
 
         this.person1.setItems(this.vertices);
-        this.person2.setItems(this.vertices);
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Teste.getInstance().getGrath().removeEdge(person1.getValue(), person2.getValue());
+                    Teste.getInstance().getGrath().removeVertex(person1.getValue());
                 } catch (IlegalArgumentException e) {
-                    System.out.println("Foi removida a amizade");
+                    System.out.println("Foi removida.");
                 }
 
             }

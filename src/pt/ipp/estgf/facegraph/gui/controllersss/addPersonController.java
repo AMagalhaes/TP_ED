@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllers;
+package pt.ipp.estgf.facegraph.gui.controllersss;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +19,7 @@ import java.io.IOException;
  * Pedro Fernandes
  */
 
-public class AddPersonController extends Pane {
+class AddPersonController extends Pane {
 
     /**
      * Class instance.

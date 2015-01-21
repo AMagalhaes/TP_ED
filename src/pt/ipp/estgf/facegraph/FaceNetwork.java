@@ -443,5 +443,40 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
 
         return (V[]) result;
     }
+
+    public String[] getAllCidades() {
+        UnorderedList<String> allCidades = new ArrayUnorderedList(this.numVertices);
+        Iterator<String> it;
+        String[] result;
+        boolean found;
+
+        for (int index = 0; index < this.numVertices; index++) {
+            found = false;
+            it = allCidades.iterator();
+
+            while (it.hasNext()) {
+                if (it.next().equals(this.vertices[index].getCidade())) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                allCidades.addToFront(this.vertices[index].getCidade());
+            }
+        }
+
+        // converte para array
+        int numCidades = allCidades.size();
+        result = new String[numCidades];
+
+        for (int index = 0; index < numCidades; index++) {
+            try {
+                result[index] = allCidades.removeFirst();
+            } catch (EmptyCollectionException e) {}
+        }
+
+        return result;
+    }
 }
 
