@@ -62,7 +62,7 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
             throw new IlegalArgumentException("Não pode criar uma ligação entre a mesma pessoa.");
         }
 
-        // cria a Arest
+        // cria a Aresta
         Aresta newAresta = new Aresta(0);
 
         // impede a criação de arestas duplicadas

@@ -11,6 +11,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
+import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
@@ -71,7 +73,16 @@ public class PathController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                output.setText(String.valueOf(Teste.getInstance().getGrath().
+                try {
+                    output.setText(String.valueOf(Teste.getInstance().getGrath().caminho(person1.getValue(), person2.getValue())));
+                } catch (IlegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (EmptyQueueException e) {
+                    e.printStackTrace();
+                } catch (EmptyCollectionException e) {
+                    e.printStackTrace();
+                }
+
 
             }
         });

@@ -128,12 +128,12 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
     /**
-     * @param nome imprime a lista de amigois de uma dada pessoa
+     * @param nome imprime a lista de amigos de uma dada pessoa
      */
-    public void imprimeDados(String nome) {
+    public void imprimeDados(Vertice nome) {
 
         for (int pos = 0; pos < numVertices; pos++) {
-            if (vertices[pos].getNome() == nome) {
+            if (vertices[pos].getNome() == nome.getNome()) {
                 System.out.print("Id: " + vertices[pos].getId());
                 System.out.print("  Nome: " + vertices[pos].getNome());
                 System.out.println("  Cidade: " + vertices[pos].getCidade());
@@ -152,11 +152,11 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
     /**
-     * imprime todas as pessoas, assim como a lista dosseus amigos
+     * imprime todas as pessoas, assim como a lista dos seus amigos
      */
     public void imprimeTudo() {
         for (int posi = 0; posi < numVertices; posi++) {
-            imprimeDados(vertices[posi].getNome());
+            imprimeDados((Vertice) vertices[posi]);
         }
     }
 
@@ -307,7 +307,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     }
 
 
-    protected FaceNetwork<V, E> grafoHabitantesMinimo() throws EmptyCollectionException, IlegalArgumentException {
+    public FaceNetwork<V, E> grafoHabitantesMinimo() throws EmptyCollectionException, IlegalArgumentException {
         int x, y;
         int index;
         double weight;

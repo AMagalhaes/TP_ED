@@ -1,6 +1,11 @@
 package pt.ipp.estgf.facegraph.entities;
 
+import pt.ipp.estgf.facegraph.Interfaces.UnorderedList;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.lists.ArrayUnorderedList;
+
+import javax.swing.text.html.HTMLDocument;
+import java.util.Iterator;
 
 /**
  * Created by antoniomagalhaes on 09/01/15.
@@ -52,6 +57,37 @@ public class Vertice implements VertexInterface {
         return nome;
 
     }
+
+
+    public String[] getCidades(){
+        UnorderedList<String> cidades = new ArrayUnorderedList<>();
+        Iterator<String> iter;
+        String[] result;
+        boolean encontra;
+
+        for (int i = 0; i < this.getCidades().length; i++){
+            encontra = false;
+            iter = cidades.iterator();
+
+            while (iter.hasNext()){
+                  if (iter.next().equals(this.))
+                      encontra = true;
+                break;
+            }
+        }
+        if(!encontra){
+         cidades.addToFront(this.);
+        }
+    }
+
+    /*
+
+                if (it.next().equals(this.vertices[index].getCidade())) {
+
+                allCidades.addToFront(this.vertices[index].getCidade());
+
+    */
+
 
 
     @Override

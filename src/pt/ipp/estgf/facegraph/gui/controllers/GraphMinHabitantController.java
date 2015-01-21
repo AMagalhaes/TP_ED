@@ -11,6 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
@@ -40,14 +41,13 @@ public class GraphMinHabitantController extends Pane {
         return instance;
     }
 
+
     @FXML
-    private ChoiceBox<VertexInterface> person1;
-    @FXML
-    private ChoiceBox<VertexInterface> person2;
-    @FXML
-    private TextArea output;
+    private ChoiceBox<VertexInterface> city;
     @FXML
     private Button buttonConfirm;
+    @FXML
+    private TextArea output;
 
     // lista com todos os vertices
     private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
@@ -56,7 +56,7 @@ public class GraphMinHabitantController extends Pane {
     private GraphMinHabitantController() {
 
         // loads the view
-        FXMLLoader loader = new FXMLLoader(GraphMinHabitantController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(PrintHabitantsController.class.getResource("../views/city.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -66,15 +66,21 @@ public class GraphMinHabitantController extends Pane {
             throw new RuntimeException(ex);
         }
 
-        this.person1.setItems(this.vertices);
-        this.person2.setItems(this.vertices);
+
+
 
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
-        //        output.setText(String.valueOf(Teste.getInstance().getGrath().  ));
+                try {
+                    output.setText(String.valueOf(Teste.getInstance().getGrath().grafoHabitantesMinimo()));
+                } catch (EmptyCollectionException e) {
+                    e.printStackTrace();
+                } catch (IlegalArgumentException e) {
+                    e.printStackTrace();
+                }
 
             }
         });

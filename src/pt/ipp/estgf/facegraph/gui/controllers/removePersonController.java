@@ -11,6 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
 import java.io.IOException;
@@ -67,15 +68,12 @@ public class RemovePersonController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                try {
+                    Teste.getInstance().getGrath().removeVertex(person1.getValue());
+                } catch (IlegalArgumentException e) {
+                    System.out.println("Foi removida.");
+                }
 
-   /*
-                 try {
-                   Teste.getInstance().getGrath().addEdge(person1.getValue());
-                     output.setText("Adicionado");
-                 } catch (IlegalArgumentException e) {
-                     System.out.println("AQUI");
-                 }
-     */
             }
         });
     }
