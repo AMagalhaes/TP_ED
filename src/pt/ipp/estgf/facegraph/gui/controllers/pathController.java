@@ -71,7 +71,6 @@ public class PathController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                output.setText(String.valueOf(Teste.getInstance().getGrath().
 
             }
         });

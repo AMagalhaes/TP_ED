@@ -4,7 +4,6 @@ import pt.ipp.estgf.facegraph.Heap.LinkedHeap;
 import pt.ipp.estgf.facegraph.Interfaces.*;
 import pt.ipp.estgf.facegraph.entities.Aresta;
 import pt.ipp.estgf.facegraph.entities.Vertice;
-import pt.ipp.estgf.facegraph.exceptions.EmptyUnorderListException;
 import pt.ipp.estgf.facegraph.lists.ArrayOrderedList;
 import pt.ipp.estgf.facegraph.lists.ArrayUnorderedList;
 import pt.ipp.estgf.facegraph.Interfaces.EdgeInterface;
@@ -223,9 +222,7 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         do {
             try {
                 weight = unArrayList.removeLast();
-            } catch (EmptyUnorderListException e) {
-                e.printStackTrace();
-            }
+            } catch (EmptyCollectionException e) { }
             unArrayList = new ArrayOrderedList<Double>();
 
             if (weight == Double.NEGATIVE_INFINITY) {
