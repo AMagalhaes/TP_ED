@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import pt.ipp.estgf.facegraph.FaceNetwork;
 import pt.ipp.estgf.facegraph.entities.Aresta;
 import pt.ipp.estgf.facegraph.entities.Vertice;
+import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.controllers.MainMenuController;
 
 import java.io.IOException;
@@ -23,8 +24,77 @@ public class Teste extends Application {
         return instance;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws IlegalArgumentException {
+
+        //  launch(args);
+
+        FaceNetwork<Vertice, Aresta> grafo = new FaceNetwork();
+
+
+        Vertice v0 = new Vertice("Pedro Fernandes", "Mondim");
+        Vertice v1 = new Vertice("Luis Costa", "Celorico");
+        Vertice v2 = new Vertice("Rui Mendes", "Lixa");
+        Vertice v3 = new Vertice("Antonio Magalhaes", "Felgueiras");
+        Vertice v4 = new Vertice("Castro Antunes", "Vila real");
+        Vertice v5 = new Vertice("Ricardo Araujo", "Porto");
+        Vertice v6 = new Vertice("Manuel Antonio", "Braga");
+
+        Vertice v7 = new Vertice("Rita Ana", "Mondim");
+        Vertice v8 = new Vertice("Ana Gomes", "Celorico");
+        Vertice v9 = new Vertice("Rute Oliveira", "Lixa");
+        Vertice v10 = new Vertice("Fatima Araujo", "Felgueiras");
+        Vertice v11 = new Vertice("Esmeralda Fonseca", "Vila real");
+        Vertice v12 = new Vertice("Susana Fernandes", "Porto");
+        Vertice v13 = new Vertice("Miguel Cunha", "Braga");
+
+        Vertice v14 = new Vertice("Paulo Miguel", "Mondim");
+        Vertice v15 = new Vertice("Fernando Alves", "Celorico");
+        Vertice v16 = new Vertice("Vitor Cerqueira", "Lixa");
+        Vertice v17 = new Vertice("Jose Manuel", "Felgueiras");
+        Vertice v18 = new Vertice("Julio Freitas", "Vila real");
+        Vertice v19 = new Vertice("Helena Braga", "Porto");
+        Vertice v20 = new Vertice("Joao Paulo", "Braga");
+
+        Vertice v21 = new Vertice("Altino Gomes", "Mondim");
+        Vertice v22 = new Vertice("Joaquim Santos", "Celorico");
+        Vertice v23 = new Vertice("Vasco Freitas", "Lixa");
+        Vertice v24 = new Vertice("Tania Mendes", "Felgueiras");
+
+        grafo.addVertex(v0);
+        grafo.addVertex(v1);
+        grafo.addVertex(v2);
+        grafo.addVertex(v3);
+        grafo.addVertex(v4);
+        grafo.addVertex(v5);
+        grafo.addVertex(v6);
+        grafo.addVertex(v7);
+        grafo.addVertex(v8);
+        grafo.addVertex(v9);
+        grafo.addVertex(v10);
+        grafo.addVertex(v11);
+        grafo.addVertex(v12);
+        grafo.addVertex(v13);
+        grafo.addVertex(v14);
+        grafo.addVertex(v15);
+        grafo.addVertex(v16);
+        grafo.addVertex(v17);
+        grafo.addVertex(v18);
+        grafo.addVertex(v19);
+        grafo.addVertex(v20);
+        grafo.addVertex(v21);
+        grafo.addVertex(v22);
+        grafo.addVertex(v23);
+        grafo.addVertex(v24);
+
+        grafo.addEdge(v0, v1, 8);
+        grafo.addEdge(v1, v2, 3);
+        grafo.addEdge(v9, v10, 8);
+        grafo.addEdge(v10, v11, 8);
+        grafo.addEdge(v18, v19, 8);
+        grafo.addEdge(v19, v20, 5);
+        grafo.addEdge(v20, v21, 1);
+
+
     }
 
     private FaceNetwork<Vertice, Aresta> graph = new FaceNetwork<Vertice, Aresta>();

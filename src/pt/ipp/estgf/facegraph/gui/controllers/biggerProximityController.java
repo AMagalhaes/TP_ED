@@ -11,7 +11,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
 import pt.ipp.estgf.facegraph.gui.Teste;
 
 import java.io.IOException;

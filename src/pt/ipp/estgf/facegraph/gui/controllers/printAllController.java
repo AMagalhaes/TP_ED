@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import pt.ipp.estgf.facegraph.gui.Teste;
 
 
 import java.io.IOException;
@@ -47,6 +48,10 @@ public class PrintAllController extends Pane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
+
+        output.setText(String.valueOf(Teste.getInstance().getGrath().imprimeTudo()));
+
 
     }
 

@@ -66,15 +66,11 @@ public class PrintPersonController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-   /*
-                 try {
-                   Teste.getInstance().getGrath().addEdge(person1.getValue());
-                     output.setText("Adicionado");
-                 } catch (IlegalArgumentException e) {
-                     System.out.println("AQUI");
-                 }
-     */
+
+                output.setText(String.valueOf(Teste.getInstance().getGrath().imprimeDados(person1.getValue())));
+
             }
         });
     }
 }
+

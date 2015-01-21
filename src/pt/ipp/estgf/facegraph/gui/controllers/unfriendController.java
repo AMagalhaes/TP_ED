@@ -72,14 +72,12 @@ public class UnfriendController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-
                 try {
-                    Teste.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue());
-                    output.setText("Adicionado");
+                    Teste.getInstance().getGrath().removeEdge(person1.getValue(), person2.getValue());
                 } catch (IlegalArgumentException e) {
-                    System.out.println("AQUI");
+                    System.out.println("Foi removida a amizade");
                 }
+
             }
         });
     }
