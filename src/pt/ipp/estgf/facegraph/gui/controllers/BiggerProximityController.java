@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 import java.io.IOException;
 
@@ -21,22 +20,26 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-public class UnfriendController extends Pane {
+public class BiggerProximityController extends Pane {
+
 
     /**
      * Class instance.
      */
-    private static UnfriendController instance;
+    private static BiggerProximityController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static UnfriendController getInstance() {
+    public static BiggerProximityController getInstance() {
         if (instance == null) {
-            instance = new UnfriendController();
+            instance = new BiggerProximityController();
         }
+
+        instance.reset();
+
         return instance;
     }
 
@@ -49,14 +52,14 @@ public class UnfriendController extends Pane {
     @FXML
     private Button buttonConfirm;
 
-
     // lista com todos os vertices
-    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
+    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Main.getInstance().getGrath().getVertexs());
 
 
-    private UnfriendController() {
+    private BiggerProximityController() {
+
         // loads the view
-        FXMLLoader loader = new FXMLLoader(UnfriendController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(BiggerProximityController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -72,13 +75,14 @@ public class UnfriendController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                try {
-                    Teste.getInstance().getGrath().removeEdge(person1.getValue(), person2.getValue());
-                } catch (IlegalArgumentException e) {
-                    System.out.println("Foi removida a amizade");
-                }
-
+                output.setText("A minima distancia entre os vertices é: " + String.valueOf(Main.getInstance().getGrath().shortestPathWeight(person1.getValue(), person2.getValue())));
             }
         });
+    }
+
+    private void reset() {
+        this.vertices.clear();
+        this.vertices.addAll(Main.getGraphInstance().getVertexs());
+        this.output.setText("");
     }
 }

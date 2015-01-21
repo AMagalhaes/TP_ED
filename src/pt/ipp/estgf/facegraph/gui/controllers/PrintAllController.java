@@ -1,10 +1,10 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-class PrintAllController extends Pane {
+public class PrintAllController extends Pane {
 
     /**
      * Class instance.
@@ -30,12 +30,12 @@ class PrintAllController extends Pane {
         if (instance == null) {
             instance = new PrintAllController();
         }
+
         return instance;
     }
 
     @FXML
     private TextArea output;
-
 
     private PrintAllController() {
         // loads the view
@@ -49,10 +49,7 @@ class PrintAllController extends Pane {
             throw new RuntimeException(ex);
         }
 
-
-        output.setText(String.valueOf(Teste.getInstance().getGrath().imprimeTudo()));
-
-
+        this.output.setText(Main.getInstance().getGrath().imprimeTudo());
     }
 
 }

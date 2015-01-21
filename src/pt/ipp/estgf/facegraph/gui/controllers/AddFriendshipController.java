@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,8 +12,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
+import pt.ipp.estgf.facegraph.entities.Vertice;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 
 import java.io.IOException;
@@ -39,6 +40,9 @@ public class AddFriendshipController extends Pane {
         if (instance == null) {
             instance = new AddFriendshipController();
         }
+
+        instance.actionToPerformOnGetInstance();
+
         return instance;
     }
 
@@ -55,7 +59,7 @@ public class AddFriendshipController extends Pane {
 
 
     // lista com todos os vertices
-    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
+    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Main.getInstance().getGrath().getVertexs());
 
     private AddFriendshipController() {
         // loads the view
@@ -72,26 +76,39 @@ public class AddFriendshipController extends Pane {
         this.person1.setItems(this.vertices);
         this.person2.setItems(this.vertices);
 
-
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                Double peso;
 
+                // faz o parse para Double
                 try {
-                    Double peso = Double.parseDouble(distance.getText());
+                     peso = Double.parseDouble(distance.getText());
                 } catch (Exception ex) {
-                    System.out.println("O valor da distancia é invalido.");
+                    output.setText("O valor da distancia é invalido.");
                     return;
                 }
 
-
                 try {
-                    Teste.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue());
-                    output.setText("Adicionado");
+                    // adiciona a nova aresta
+                    Main.getInstance().getGrath().addEdge(person1.getValue(), person2.getValue(), peso);
+
+                    // informa que a aresta foi adicionada
+                    output.setText("Uma nova amizade foi criada");
                 } catch (IlegalArgumentException e) {
-                    System.out.println("AQUI");
+                    output.setText("Impossivel criar a amizade: " + e.getMessage());
                 }
             }
         });
+    }
+
+    private void actionToPerformOnGetInstance() {
+        // obtem todos os vertices
+        this.vertices.clear();
+        this.vertices.addAll(Main.getGraphInstance().getVertexs());
+
+        // faz o reset de todos os inputs/outputs
+        this.output.setText("");
+        this.distance.setText("");
     }
 }

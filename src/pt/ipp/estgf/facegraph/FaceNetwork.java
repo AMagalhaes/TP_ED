@@ -129,34 +129,41 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
     /**
      * @param nome imprime a lista de amigos de uma dada pessoa
      */
-    public void imprimeDados(Vertice nome) {
+    public String imprimeDados(Vertice nome) {
+        String result = "";
 
         for (int pos = 0; pos < numVertices; pos++) {
             if (vertices[pos].getNome() == nome.getNome()) {
-                System.out.print("Id: " + vertices[pos].getId());
-                System.out.print("  Nome: " + vertices[pos].getNome());
-                System.out.println("  Cidade: " + vertices[pos].getCidade());
+                result += "Id: " + vertices[pos].getId() + "\n";
+                result += "  Nome: " + vertices[pos].getNome() + "\n";
+                result += "  Cidade: " + vertices[pos].getCidade() + "\n";
 
-                System.out.println("AMIGOS : ");
-                System.out.println("Id \t nome \t cidade \t");
+                result += "AMIGOS : \n";
+                result += "Id \t nome \t cidade \t\n";
                 for (int l = 0; l <= numVertices; l++) {
                     if (adjMatrix[pos][l] != null) {
-                        System.out.print(vertices[l].getId() + " \t ");
-                        System.out.print(vertices[l].getNome() + " \t ");
-                        System.out.print(vertices[l].getCidade() + " \n");
+                        result += vertices[l].getId() + " \t ";
+                        result += vertices[l].getNome() + " \t ";
+                        result += vertices[l].getCidade() + " \n";
                     }
                 }
             }
         }
+
+        return result;
     }
 
     /**
      * imprime todas as pessoas, assim como a lista dos seus amigos
      */
-    public void imprimeTudo() {
+    public String imprimeTudo() {
+        String result = "";
+
         for (int posi = 0; posi < numVertices; posi++) {
-            imprimeDados((Vertice) vertices[posi]);
+            result += imprimeDados((Vertice) vertices[posi]);
         }
+
+        return result;
     }
 
     /**
@@ -303,8 +310,41 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         return result;
     }
 
+    public FaceNetwork<V, E> graphoHabitantes(String cidade) {
+        FaceNetwork newGraph = new FaceNetwork();
 
-    public FaceNetwork<V, E> grafoHabitantesMinimo() throws EmptyCollectionException, IlegalArgumentException {
+        // copia os vertices
+        newGraph.vertices = new Vertice[this.numVertices];
+        newGraph.numVertices = this.numVertices;
+        for (int i = 0; i < this.numVertices; i++) {
+            newGraph.vertices[i] = this.vertices[i];
+        }
+
+        // copia as arestas
+        newGraph.adjMatrix = new Aresta[this.numVertices][this.numVertices];
+        newGraph.numEdges = this.numEdges;
+        for (int x = 0; x < this.numVertices; x++) {
+            for (int y = 0; y < this.numVertices; y++) {
+                newGraph.adjMatrix[x][y] = this.adjMatrix[x][y];
+                newGraph.adjMatrix[y][x] = this.adjMatrix[y][x];
+            }
+        }
+
+        for (int i = 0; i < this.numVertices; i++) {
+            if (!this.vertices[i].getCidade().equals(cidade)) {
+                try {
+                    newGraph.removeVertex(this.vertices[i]);
+                } catch (IlegalArgumentException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return newGraph;
+    }
+
+
+    public FaceNetwork<V, E> grafoHabitantesMinimo(String cidade) throws EmptyCollectionException, IlegalArgumentException {
         int x, y;
         int index;
         double weight;
@@ -312,35 +352,39 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         HeapADT<Double> miniHeap
                 = new LinkedHeap<Double>();
         FaceNetwork<V, E> resultGraph = new FaceNetwork<V, E>();
-        if (isEmpty() || isConnected()) {
+        FaceNetwork graphHabitantes = this.graphoHabitantes(cidade);
+
+        if (graphHabitantes.isEmpty() || !graphHabitantes.isConnected()) {
             return resultGraph;
         }
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                resultGraph.adjMatrix[i][j].setWeight(Double.POSITIVE_INFINITY);
-            }
-        }
-        resultGraph.vertices = (V[]) new Vertice[numVertices];
-        boolean[] visited = new boolean[numVertices];
-        for (int i = 0; i < numVertices; i++) {
+
+        resultGraph.vertices = (V[]) new Vertice[graphHabitantes.numVertices];
+        boolean[] visited = new boolean[graphHabitantes.numVertices];
+        for (int i = 0; i < graphHabitantes.numVertices; i++) {
             visited[i] = false;
         }
+
         edge[0] = 0;
-        resultGraph.vertices[0] = this.vertices[0];
+        resultGraph.vertices[0] = (V) graphHabitantes.vertices[0];
         resultGraph.numVertices++;
         visited[0] = true;
 
 
         // adiciona todos os vertices que são adjecentes ao vertice inicial á heap
-
-        for (int i = 0; i < numVertices; i++) {
-            miniHeap.addElement(new Double(adjMatrix[0][i].getWeight()));
+        for (int i = 0; i < graphHabitantes.numVertices; i++) {
+            if (graphHabitantes.adjMatrix[0][i] != null) {
+                miniHeap.addElement(graphHabitantes.adjMatrix[0][i].getWeight());
+            } else {
+                miniHeap.addElement(Double.POSITIVE_INFINITY);
+            }
         }
-        while ((resultGraph.size() < this.size()) && !miniHeap.isEmpty()) {
+
+        while ((resultGraph.size() < graphHabitantes.size()) && !miniHeap.isEmpty()) {
             do {
-                weight = (miniHeap.removeMin()).doubleValue();
-                edge = getEdgeWithWeightOf(weight, visited);
-            } while (indexIsValid(edge[0]) || !indexIsValid(edge[1]));
+                weight = miniHeap.removeMin();
+                edge = graphHabitantes.getEdgeWithWeightOf(weight, visited);
+            } while (!graphHabitantes.indexIsValid(edge[0]) || !graphHabitantes.indexIsValid(edge[1]));
+
             x = edge[0];
             y = edge[1];
             if (!visited[x]) {
@@ -348,22 +392,21 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
             } else {
                 index = y;
             }
+
             // adiciona uma nova aresta e um vertice ao resultGraph
-            resultGraph.vertices[index] = this.vertices[index];
+            resultGraph.vertices[index] = (V) graphHabitantes.vertices[index];
             visited[index] = true;
             resultGraph.numVertices++;
-            resultGraph.adjMatrix[x][y] = this.adjMatrix[x][y];
-            resultGraph.adjMatrix[y][x] = this.adjMatrix[y][x];
+            resultGraph.adjMatrix[x][y] = (E) graphHabitantes.adjMatrix[x][y];
+            resultGraph.adjMatrix[y][x] = (E) graphHabitantes.adjMatrix[y][x];
 
             // adiciona á heap todas as arestas que são adjacentes ao novo vertice
-
-            for (int i = 0; i < numVertices; i++) {
-                if (!visited[i] && ((this.adjMatrix[i][index].getWeight()) < Double.POSITIVE_INFINITY)) {
-
+            for (int i = 0; i < graphHabitantes.numVertices; i++) {
+                if (!visited[i] && graphHabitantes.adjMatrix[index][i] != null) {
+                    edge[0] = index;
+                    edge[1] = i;
+                    miniHeap.addElement(graphHabitantes.adjMatrix[index][i].getWeight());
                 }
-                edge[0] = index;
-                edge[1] = i;
-                miniHeap.addElement(new Double(adjMatrix[index][i].getWeight()));
             }
         }
 
@@ -388,25 +431,6 @@ public class FaceNetwork<V extends VertexInterface, E extends EdgeInterface> ext
         edge[1] = -1;
         return edge;
     }
-
-
-    protected E[][] grafoCidade(String cidade) {
-        E[][] adjMatrixCidade = (E[][]) (new Aresta[numVertices][numVertices]);
-
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (adjMatrix[i][j].getWeight() > 0 && adjMatrix[i][j].getWeight() < Double.POSITIVE_INFINITY) {
-                    if (vertices[i].getCidade() == vertices[j].getCidade()) {
-                        adjMatrixCidade[i][j] = adjMatrix[i][j];
-                    }
-                }
-            }
-
-        }
-
-        return adjMatrixCidade;
-    }
-
 
     public boolean caminho(V startVertex, V targetVertex) throws IlegalArgumentException, EmptyQueueException, EmptyCollectionException {
         if (indexIsValid(getIndex(startVertex)) && indexIsValid(getIndex(targetVertex))) {

@@ -1,7 +1,7 @@
 package pt.ipp.estgf.facegraph.lists;
 
 import pt.ipp.estgf.facegraph.Interfaces.UnorderedList;
-import pt.ipp.estgf.facegraph.exceptions.EmptyUnorderListException;
+import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
 
 import java.util.Iterator;
 
@@ -87,7 +87,7 @@ public class ArrayUnorderedList<T> implements UnorderedList<T> {
     }
 
     @Override
-    public T removeFirst() throws EmptyUnorderListException {
+    public T removeFirst() throws EmptyCollectionException {
         Object obj;
         modCount--;
         if (isEmpty()) {
@@ -104,7 +104,7 @@ public class ArrayUnorderedList<T> implements UnorderedList<T> {
     }
 
     @Override
-    public T removeLast() throws EmptyUnorderListException {
+    public T removeLast() throws EmptyCollectionException {
         Object obj;
         modCount--;
         if (isEmpty()) {
@@ -119,7 +119,7 @@ public class ArrayUnorderedList<T> implements UnorderedList<T> {
     }
 
     @Override
-    public T remove(T element) throws EmptyUnorderListException {
+    public T remove(T element) throws EmptyCollectionException {
         boolean exist = false;
         modCount--;
         if (isEmpty()) {
@@ -146,17 +146,17 @@ public class ArrayUnorderedList<T> implements UnorderedList<T> {
     }
 
     @Override
-    public T first() throws EmptyUnorderListException {
+    public T first() throws EmptyCollectionException {
         return (T) item[0];
     }
 
     @Override
-    public T last() throws EmptyUnorderListException {
+    public T last() throws EmptyCollectionException {
         return (T) item[size - 1];
     }
 
     @Override
-    public boolean contains(T element) throws EmptyUnorderListException {
+    public boolean contains(T element) throws EmptyCollectionException {
         if (isEmpty()) {
             System.out.println(" Array vazio");
             return false;

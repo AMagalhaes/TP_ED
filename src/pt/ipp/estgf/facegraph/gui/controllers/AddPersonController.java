@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.entities.Vertice;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -19,7 +19,7 @@ import java.io.IOException;
  * Pedro Fernandes
  */
 
-class AddPersonController extends Pane {
+public class AddPersonController extends Pane {
 
     /**
      * Class instance.
@@ -35,6 +35,10 @@ class AddPersonController extends Pane {
         if (instance == null) {
             instance = new AddPersonController();
         }
+
+        // reset all fields
+        instance.resetFields(true);
+
         return instance;
     }
 
@@ -63,12 +67,28 @@ class AddPersonController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().getGrath().addVertex(new Vertice(personName.getText(), personCity.getText()));
+                Main.getInstance().getGrath().addVertex(new Vertice(personName.getText(), personCity.getText()));
                 output.setText("Foi criada a pessoa");
+
+                // reset fields
+                AddPersonController.this.resetFields(false);
             }
 
         });
+    }
 
+    /**
+     * Faz o reset de todos os campos
+     *
+     * @param all Se true apaga tambem o output
+     */
+    public void resetFields(boolean all) {
+        this.personName.setText("");
+        this.personCity.setText("");
+
+        if (all) {
+            this.output.setText("");
+        }
     }
 
 

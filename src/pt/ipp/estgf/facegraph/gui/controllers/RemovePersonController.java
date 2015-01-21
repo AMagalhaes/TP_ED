@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-class RemovePersonController extends Pane {
+public class RemovePersonController extends Pane {
 
     /**
      * Classe instance
@@ -36,6 +36,8 @@ class RemovePersonController extends Pane {
             instance = new RemovePersonController();
         }
 
+        instance.resetFields(true);
+
         return instance;
     }
 
@@ -48,7 +50,7 @@ class RemovePersonController extends Pane {
     private Button buttonConfirm;
 
     // lista com todos os vertices
-    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
+    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Main.getInstance().getGrath().getVertexs());
 
     private RemovePersonController() {
 
@@ -69,12 +71,23 @@ class RemovePersonController extends Pane {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Teste.getInstance().getGrath().removeVertex(person1.getValue());
+                    Main.getInstance().getGrath().removeVertex(person1.getValue());
+                    RemovePersonController.this.output.setText("A pessoa '" + person1.getValue().getNome() + "' foi removida.");
+                    resetFields(false);
                 } catch (IlegalArgumentException e) {
-                    System.out.println("Foi removida.");
+                    RemovePersonController.this.output.setText("Erro ao remover a pessoa.");
                 }
 
             }
         });
+    }
+
+    private void resetFields(boolean all) {
+        this.vertices.clear();
+        this.vertices.addAll(Main.getGraphInstance().getVertexs());
+
+        if (all) {
+            this.output.setText("");
+        }
     }
 }

@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class MainMenuController extends MenuBar {
         this.addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(AddPersonController.getInstance());
+                Main.getInstance().setCenterNode(AddPersonController.getInstance());
             }
         });
 
@@ -66,7 +66,7 @@ public class MainMenuController extends MenuBar {
         this.addFriendShip.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(AddFriendshipController.getInstance());
+                Main.getInstance().setCenterNode(AddFriendshipController.getInstance());
             }
         });
 
@@ -74,7 +74,7 @@ public class MainMenuController extends MenuBar {
         this.removePerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(RemovePersonController.getInstance());
+                Main.getInstance().setCenterNode(RemovePersonController.getInstance());
             }
         });
 
@@ -82,7 +82,7 @@ public class MainMenuController extends MenuBar {
         this.enemies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(UnfriendController.getInstance());
+                Main.getInstance().setCenterNode(UnfriendController.getInstance());
             }
         });
 
@@ -90,7 +90,7 @@ public class MainMenuController extends MenuBar {
         this.biggerProximity.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(BiggerProximityController.getInstance());
+                Main.getInstance().setCenterNode(BiggerProximityController.getInstance());
             }
         });
 
@@ -98,7 +98,7 @@ public class MainMenuController extends MenuBar {
         this.shortProximity.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(ShortProximityController.getInstance());
+                Main.getInstance().setCenterNode(ShortProximityController.getInstance());
             }
         });
 
@@ -106,7 +106,7 @@ public class MainMenuController extends MenuBar {
         this.path.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(PathController.getInstance());
+                Main.getInstance().setCenterNode(PathController.getInstance());
             }
         });
 
@@ -114,7 +114,7 @@ public class MainMenuController extends MenuBar {
         this.printData.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(PrintPersonController.getInstance());
+                Main.getInstance().setCenterNode(PrintPersonController.getInstance());
             }
         });
 
@@ -123,7 +123,7 @@ public class MainMenuController extends MenuBar {
         this.printAll.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(PrintAllController.getInstance());
+                Main.getInstance().setCenterNode(PrintAllController.getInstance());
             }
         });
 
@@ -131,7 +131,7 @@ public class MainMenuController extends MenuBar {
         this.habitants.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(PrintHabitantsController.getInstance());
+                Main.getInstance().setCenterNode(PrintHabitantsController.getInstance());
             }
         });
 
@@ -139,7 +139,7 @@ public class MainMenuController extends MenuBar {
         this.graphMinHabitant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(GraphMinHabitantController.getInstance());
+                Main.getInstance().setCenterNode(GraphMinHabitantController.getInstance());
             }
         });
 
@@ -147,7 +147,7 @@ public class MainMenuController extends MenuBar {
         this.graphHabitant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Teste.getInstance().setCenterNode(GraphHabitantController.getInstance());
+                Main.getInstance().setCenterNode(GraphHabitantController.getInstance());
             }
         });
 

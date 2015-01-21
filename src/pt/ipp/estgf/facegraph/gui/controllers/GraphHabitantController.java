@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,46 +11,48 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 import java.io.IOException;
 
 /**
- * Work done by:
- * Antonio Magalhaes
- * Pedro Fernandes
+ * Created by PedroFernandes on 16/01/15.
  */
-public class PrintHabitantsController extends Pane {
+public class GraphHabitantController extends Pane {
+
     /**
-     * Class instance.
+     * Work done by:
+     * Antonio Magalhaes
+     * Pedro Fernandes
      */
-    private static PrintHabitantsController instance;
+    private static GraphHabitantController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static PrintHabitantsController getInstance() {
+    public static GraphHabitantController getInstance() {
         if (instance == null) {
-            instance = new PrintHabitantsController();
+            instance = new GraphHabitantController();
         }
         return instance;
     }
 
     @FXML
-    private ChoiceBox<VertexInterface> city;
+    private ChoiceBox<String> city;
     @FXML
     private Button buttonConfirm;
     @FXML
     private TextArea output;
 
     //lista com as cidades
-    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
+    private ObservableList<String> vertices = FXCollections.observableArrayList(Main.getInstance().getGrath().getAllCidades());
 
-    private PrintHabitantsController() {
+
+    private GraphHabitantController() {
         // loads the view
-        FXMLLoader loader = new FXMLLoader(PrintHabitantsController.class.getResource("../views/city.fxml"));
+        FXMLLoader loader = new FXMLLoader(GraphHabitantController.class.getResource("../views/city.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -66,11 +68,7 @@ public class PrintHabitantsController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-
-                Teste.getInstance().getGrath().addVertex(city.getValue());
-
-                output.setText("Adicionado");
+                output.setText(String.valueOf(Main.getGraphInstance().graphoHabitantes(city.getValue())));
             }
         });
     }

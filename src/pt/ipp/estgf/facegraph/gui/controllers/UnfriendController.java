@@ -1,4 +1,4 @@
-package pt.ipp.estgf.facegraph.gui.controllersss;
+package pt.ipp.estgf.facegraph.gui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +11,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import pt.ipp.estgf.facegraph.Interfaces.VertexInterface;
-import pt.ipp.estgf.facegraph.exceptions.EmptyCollectionException;
-import pt.ipp.estgf.facegraph.exceptions.EmptyQueueException;
 import pt.ipp.estgf.facegraph.exceptions.IlegalArgumentException;
-import pt.ipp.estgf.facegraph.gui.Teste;
+import pt.ipp.estgf.facegraph.gui.Main;
 
 import java.io.IOException;
 
@@ -23,21 +21,25 @@ import java.io.IOException;
  * Antonio Magalhaes
  * Pedro Fernandes
  */
-class PathController extends Pane {
+public class UnfriendController extends Pane {
+
     /**
      * Class instance.
      */
-    private static PathController instance;
+    private static UnfriendController instance;
 
     /**
      * Get the class instance.
      *
      * @return
      */
-    public static PathController getInstance() {
+    public static UnfriendController getInstance() {
         if (instance == null) {
-            instance = new PathController();
+            instance = new UnfriendController();
         }
+
+        instance.reset(true);
+
         return instance;
     }
 
@@ -50,13 +52,14 @@ class PathController extends Pane {
     @FXML
     private Button buttonConfirm;
 
+
     // lista com todos os vertices
-    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Teste.getInstance().getGrath().getVertexs());
+    private ObservableList<VertexInterface> vertices = FXCollections.observableArrayList(Main.getInstance().getGrath().getVertexs());
 
-    private PathController() {
 
+    private UnfriendController() {
         // loads the view
-        FXMLLoader loader = new FXMLLoader(PathController.class.getResource("../views/person1And2.fxml"));
+        FXMLLoader loader = new FXMLLoader(UnfriendController.class.getResource("../views/person1And2.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -72,18 +75,32 @@ class PathController extends Pane {
         buttonConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-
-                try {
-                    output.setText(String.valueOf(Teste.getInstance().getGrath().caminho(person1.getValue(), person2.getValue())));
-                } catch (IlegalArgumentException e) {
-                } catch (EmptyQueueException e) {
-
-                } catch (EmptyCollectionException e) { }
-
-
-
+                buttonAction();
             }
         });
+    }
+
+    private void reset(boolean all) {
+        this.vertices.clear();
+        this.vertices.addAll(Main.getGraphInstance().getVertexs());
+
+        if (all) {
+            this.output.setText("");
+        }
+    }
+
+    private void buttonAction() {
+        if (this.person1.getValue().equals(this.person2.getValue())) {
+            this.output.setText("Não pode remover uma amizade com a mesma pessoa.");
+            return;
+        }
+
+        try {
+            Main.getInstance().getGrath().removeEdge(person1.getValue(), person2.getValue());
+            this.output.setText("As duas pessoas selecionadas são agora inimigos.");
+            reset(false);
+        } catch (IlegalArgumentException e) {
+            this.output.setText("Foi impossivel remover a amizade: " + e.getMessage());
+        }
     }
 }

@@ -176,29 +176,24 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
             throw new IlegalArgumentException("vertice não encontrado");
         }
 
-        // percorrer a matriz para anular as arestas deste vertice
-        for (int i = 0; i < vertices.length; i++) {
-            // remove a aresta caso exista
-            if (this.adjMatrix[pos][i] != null) {
-                this.adjMatrix[pos][i] = null;
-                this.adjMatrix[i][pos] = null;
-                this.numEdges--;
-            }
-        }
-
-        // recuar os vertices para a posição vazia por remover o vertice
-        for (int posV = pos; posV < numVertices; posV++) {
-            vertices[posV] = vertices[posV + 1];
-        }
-
-        for (int x = pos + 1; x < numVertices; x++) {
-            for (int y = pos + 1; y < numVertices; y++) {
-                adjMatrix[x - 1][y - 1] = adjMatrix[x][y];
-            }
-        }
-
         // atualiza o numero de vertices
         this.numVertices--;
+
+        for (int i = pos; i < numVertices; i++) {
+            vertices[i] = vertices[i + 1];
+        }
+
+        for (int i = pos; i < numVertices; i++) {
+            for (int j = 0; j <= numVertices; j++) {
+                adjMatrix[i][j] = adjMatrix[i + 1][j];
+            }
+        }
+
+        for (int i = pos; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                adjMatrix[j][i] = adjMatrix[j][i + 1];
+            }
+        }
     }
 
     /**
@@ -462,17 +457,17 @@ public class Graph<V extends VertexInterface, E extends EdgeInterface> implement
     public String toString() {
         String adjMatrixTooString = " ";
         System.out.print("   ");
-        for (int pos = 0; pos < vertices.length; pos++) {
+        for (int pos = 0; pos < this.numVertices; pos++) {
             if (vertices[pos] != null) {
                 adjMatrixTooString += vertices[pos].getNome() + "   ";
             }
         }
         adjMatrixTooString += "\n";
-        for (int linha = 0; linha < vertices.length; linha++) {
+        for (int linha = 0; linha < this.numVertices; linha++) {
             if (vertices[linha] != null) {
                 adjMatrixTooString += vertices[linha].getNome() + "  ";
 
-                for (int coluna = 0; coluna < vertices.length; coluna++) {
+                for (int coluna = 0; coluna < this.numVertices; coluna++) {
                     if (vertices[coluna] != null)
                         if (adjMatrix[linha][coluna] == null) {
                             adjMatrixTooString += "0.0 ";
